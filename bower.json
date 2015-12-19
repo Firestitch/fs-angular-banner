@@ -1,12 +1,9 @@
 {
-  "name": "fs-angular-prettytime",
+  "name": "fs-angular-banner",
   "description": "",
   "main": [
-    "dist/prettytime.js"
+    "dist/banner.js"
   ],
-  "dependencies": {
-    "fs-pluralize": "~1.2.1"
-  },
   "authors": [
     "Firestitch Inc."
   ],
