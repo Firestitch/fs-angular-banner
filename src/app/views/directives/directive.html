@@ -1,0 +1,29 @@
+<md-toolbar layout="row" layout-align="start center" class="banner">
+    <div class="avatar" ng-class="{ clickable: options.avatar.click }" ng-click="click($event,options.avatar.click)">
+        <a href ng-click="click(options.avatar.action.click)" ng-show="options.avatar.action.icon" class="action-icon" layout="row" layout-align="center center">
+            <i class="material-icons">{{options.avatar.action.icon}}</i>
+        </a>
+        <div class="icon">
+            <i class="material-icons">{{options.avatar.icon}}</i>
+        </div>
+    </div>
+    <div>
+        <h3 class="md-headline username">{{options.headline}}</h3>
+        <div class="subheadline">{{options.subheadline}}</div>
+    </div>
+
+    <div class="actions">
+        <md-button ng-repeat="action in options.actions"
+            class="md-fab md-accent"
+            aria-label="Save"
+            type="{{action.type}}"
+            ng-click="action.click()"
+        >
+            <md-icon md-icon-set="material-icons">{{action.icon}}</md-icon>
+            <!--
+            <md-icon md-icon-set="material-icons" ng-if="userCtrl.fabIcon == 'success'">check</md-icon>
+            <md-icon md-icon-set="material-icons" ng-if="userCtrl.fabIcon == 'fail'">error</md-icon>
+            -->
+        </md-button>
+    </div>        
+</md-toolbar>

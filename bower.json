@@ -1,0 +1,19 @@
+{
+  "name": "fs-angular-prettytime",
+  "description": "",
+  "main": [
+    "dist/prettytime.js"
+  ],
+  "dependencies": {
+    "fs-pluralize": "~1.2.1"
+  },
+  "authors": [
+    "Firestitch Inc."
+  ],
+  "license": "MIT",
+  "ignore": [
+    "src",
+    ".gitignore"
+  ],
+  "private": false
+}
