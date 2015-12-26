@@ -1,7 +1,5 @@
 (function () {
     'use strict';
     
-	angular.module('fs-angular-prettytime',[]);
-
-
+	angular.module('fs-angular-banner',[]);
 })();
