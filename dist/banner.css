@@ -1,21 +1,21 @@
 fs-banner {
-	position: relative;
+    position: relative;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
 }
 
 fs-banner .avatar {
-	position: relative;
+    position: relative;
 }
 
 fs-banner .avatar.clickable {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 fs-banner .avatar .md-button {
-	padding: 0;
-	margin: 0;
+    padding: 0;
+    margin: 0;
 }
 
 
@@ -40,7 +40,7 @@ fs-banner .avatar .icon {
     margin: 1.2em;
     text-align: center;
     background-position: 50% 50%;
-	background-size: contain;
+    background-size: contain;
 }
 
 fs-banner .avatar .icon > .material-icons {
@@ -57,29 +57,35 @@ fs-banner .avatar .action-icon {
     right: 10%;
     top: 10%;
     color: inherit;
-	text-decoration: none;
+    text-decoration: none;
 }
 
 fs-banner .avatar .action-icon .material-icons {
-	font-size: 18px;
+    font-size: 18px;
+    line-height: 24px;
+    width: 18px;
+    height: 18px;
 }
 
 fs-banner .subheadline {
-	color: #555;
-	margin: 0;
+    color: #555;
+    margin: 0;
 }
 
 fs-banner .headline {
-	color: #222;
-	margin: 0 0 5px 0;
+    color: #222;
+    margin: 0 0 5px 0;
 }
 
 fs-banner .actions {
-	position: absolute;
-	right: 35px;
-	bottom: -28px;	
+    position: absolute;
+    right: 35px;
+    bottom: -28px;  
 }
 
 fs-banner .actions .material-icons {
-	font-size: 28px;
+    font-size: 28px;
+    line-height: 28px;
+    width: 28px;
+    height: 28px;    
 }
