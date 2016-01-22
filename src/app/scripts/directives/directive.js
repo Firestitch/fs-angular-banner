@@ -41,22 +41,43 @@
         </tr>
         </tbody></table>
      */
-    angular.module('fs-angular-banner')
-    .directive('banner', function () {
+
+    var banner = function ($compile, fsBanner, $timeout) {
         return {
-            templateUrl: './views/directives/banner.html',
+            templateUrl: 'views/directives/banner.html',
             restrict: 'E',
             replace: false,
+            transclude: true,
             scope: {
                 options: "=bnOptions"
             },
             link: function ($scope, element, attr) {
-                
-                $scope.options.actions = $scope.options.actions || [];
 
-                $scope.click = click;
+                $scope.options = fsBanner.create($scope.options).options();
 
-                function click($event,func) {
+                var avatarAction = angular.element(document.querySelector('.action-icon'));
+  
+                if($scope.options.avatar.action.upload) {
+
+                    avatarAction.removeAttr('ng-transclude');
+                   
+                    angular.forEach($scope.options.avatar.action.upload,function(value, name) {
+                        
+                        if(name=='select')
+                            return;
+
+                        avatarAction.attr(name,value);
+                    });
+
+                    avatarAction.attr('ngf-select','upload($files)');
+                    $compile(avatarAction)($scope);
+                }
+
+                $scope.upload = function(file) {
+                    $scope.options.avatar.action.upload.select(file);
+                }
+
+                $scope.click = function(func, $event) {
                     if(func) {
                         $event.stopPropagation();
                         func();
@@ -64,5 +85,9 @@
                 }
             }
         };
-    });
+    }
+
+    angular.module('app')
+    .directive('banner',banner)
+    .directive('fsBanner',banner);
 })();

@@ -51,22 +51,43 @@
         </tr>
         </tbody></table>
      */
-    angular.module('fs-angular-banner')
-    .directive('banner', function () {
+
+    var banner = function ($compile, fsBanner, $timeout) {
         return {
-            templateUrl: './views/directives/banner.html',
+            templateUrl: 'views/directives/banner.html',
             restrict: 'E',
             replace: false,
+            transclude: true,
             scope: {
                 options: "=bnOptions"
             },
             link: function ($scope, element, attr) {
-                
-                $scope.options.actions = $scope.options.actions || [];
 
-                $scope.click = click;
+                $scope.options = fsBanner.create($scope.options).options();
 
-                function click($event,func) {
+                var avatarAction = angular.element(document.querySelector('.action-icon'));
+  
+                if($scope.options.avatar.action.upload) {
+
+                    avatarAction.removeAttr('ng-transclude');
+                   
+                    angular.forEach($scope.options.avatar.action.upload,function(value, name) {
+                        
+                        if(name=='select')
+                            return;
+
+                        avatarAction.attr(name,value);
+                    });
+
+                    avatarAction.attr('ngf-select','upload($files)');
+                    $compile(avatarAction)($scope);
+                }
+
+                $scope.upload = function(file) {
+                    $scope.options.avatar.action.upload.select(file);
+                }
+
+                $scope.click = function(func, $event) {
                     if(func) {
                         $event.stopPropagation();
                         func();
@@ -74,31 +95,105 @@
                 }
             }
         };
-    });
+    }
+
+    angular.module('app')
+    .directive('banner',banner)
+    .directive('fsBanner',banner);
 })();
 
 (function () {
-    'use strict';
+    'use strict';
 
-})();
-
+    angular.module('fs-angular-banner')
+    .factory('fsBanner', function (apiService) {
+ 
+        function Banner(options) {
+            this._options = options || {};
+            this._options.avatar = this._options.avatar || {};
+            this._options.actions = this._options.actions || [];
+            this._options.avatar.action = this._options.avatar.action || {};
+            this._options.styles = this._options.styles || '';
+
+            this.avatarActionClick = function(icon, func) {
+                this._options.avatar.action.icon = icon;
+                this._options.avatar.action.click = func;
+            };
+
+            this.background = function(background) {
+                this._options.styles = "background-image: url('" + background + "');";
+            };
+
+            this.avatarActionUpload = function(icon, func, options) {
+                options = options || {};
+                options.select = func;
+                this._options.avatar.action.icon = icon;
+                this._options.avatar.action.upload = options;
+            };
+
+            this.addAction = function(icon, click, options) {
+                var action = options || {};
+                action.click = click;
+                action.icon = icon;
+                this._options.actions.push(action);
+            };
+
+            this.headline = function(headline) {
+                this._options.headline = headline;
+            };
+
+            this.subheadline = function(subheadline) {
+                this._options.subheadline = subheadline;
+            };
+
+            this.avatarImage = function(image) {
+                this._options.avatar.image = image;
+            };
+
+            this.avatarIcon = function(icon) {
+                this._options.avatar.icon = icon;
+            };
+
+            this.options = function() {
+                return this._options;
+            };
+
+            return this;
+        }
+
+        var service = {
+            create: create
+        };
+       
+        return service;
+
+        function create(options) {
+            return new Banner(options); 
+        }
+
+    });
+})();
 angular.module('fs-angular-banner').run(['$templateCache', function($templateCache) {
   'use strict';
 
-  $templateCache.put('views/directives/directive.html',
-    "<md-toolbar layout=\"row\" layout-align=\"start center\" class=\"banner\">\r" +
+  $templateCache.put('views/directives/banner.html',
+    "\r" +
     "\n" +
-    "    <div class=\"avatar\" ng-class=\"{ clickable: options.avatar.click }\" ng-click=\"click($event,options.avatar.click)\">\r" +
+    "<md-toolbar layout=\"row\" layout-align=\"start center\" style=\"{{ options.styles }}\">\r" +
     "\n" +
-    "        <a href ng-click=\"click(options.avatar.action.click)\" ng-show=\"options.avatar.action.icon\" class=\"action-icon\" layout=\"row\" layout-align=\"center center\">\r" +
+    "    <div class=\"avatar\" ng-class=\"{ clickable: options.avatar.click }\" ng-click=\"click(options.avatar.click, $event)\">\r" +
     "\n" +
-    "            <i class=\"material-icons\">{{options.avatar.action.icon}}</i>\r" +
+    "        <md-button ng-show=\"options.avatar.action.icon\" class=\"md-fab action-icon\">\r" +
     "\n" +
-    "        </a>\r" +
+    "            <md-icon>{{options.avatar.action.icon}}</md-icon>\r" +
     "\n" +
-    "        <div class=\"icon\">\r" +
+    "        </md-button>\r" +
     "\n" +
-    "            <i class=\"material-icons\">{{options.avatar.icon}}</i>\r" +
+    "        <div class=\"icon\" ng-show=\"options.avatar.image\" style=\"background-image: url('{{options.avatar.image}}')\"></div>\r" +
+    "\n" +
+    "        <div class=\"icon\" ng-show=\"!options.avatar.image\">\r" +
+    "\n" +
+    "            <md-icon>{{options.avatar.icon}}</md-icon>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
@@ -106,43 +201,24 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
     "\n" +
     "    <div>\r" +
     "\n" +
-    "        <h3 class=\"md-headline username\">{{options.headline}}</h3>\r" +
+    "        <h1 class=\"headline\">{{options.headline}}</h1>\r" +
     "\n" +
-    "        <div class=\"subheadline\">{{options.subheadline}}</div>\r" +
+    "        <h2 class=\"subheadline\">{{options.subheadline}}</h2>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
-    "\r" +
-    "\n" +
     "    <div class=\"actions\">\r" +
     "\n" +
-    "        <md-button ng-repeat=\"action in options.actions\"\r" +
-    "\n" +
-    "            class=\"md-fab md-accent\"\r" +
-    "\n" +
-    "            aria-label=\"Save\"\r" +
-    "\n" +
-    "            type=\"{{action.type}}\"\r" +
-    "\n" +
-    "            ng-click=\"action.click()\"\r" +
-    "\n" +
-    "        >\r" +
+    "        <md-button ng-repeat=\"action in options.actions\" class=\"md-fab md-accent\" aria-label=\"Save\" type=\"{{action.type}}\" ng-click=\"action.click($event)\">\r" +
     "\n" +
     "            <md-icon md-icon-set=\"material-icons\">{{action.icon}}</md-icon>\r" +
     "\n" +
-    "            <!--\r" +
-    "\n" +
-    "            <md-icon md-icon-set=\"material-icons\" ng-if=\"userCtrl.fabIcon == 'success'\">check</md-icon>\r" +
-    "\n" +
-    "            <md-icon md-icon-set=\"material-icons\" ng-if=\"userCtrl.fabIcon == 'fail'\">error</md-icon>\r" +
-    "\n" +
-    "            -->\r" +
-    "\n" +
     "        </md-button>\r" +
     "\n" +
-    "    </div>        \r" +
+    "    </div>\r" +
     "\n" +
-    "</md-toolbar>"
+    "</md-toolbar>\r" +
+    "\n"
   );
 
 }]);

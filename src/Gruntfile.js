@@ -68,7 +68,7 @@ module.exports = function(grunt) {
                             module: 'fs-angular-banner',
                         },
                         cwd:        'app',
-                        src:        'views/directives/directive.html',
+                        src:        'views/directives/banner.html',
                         dest:       '.tmp/directivetemplate.js'
                     }
                 },
@@ -280,7 +280,7 @@ module.exports = function(grunt) {
                                 expand: true,
                                 dot: true,
                                 cwd: 'app/styles/directives',
-                                src: [],
+                                src: ["*.*"],
                                 dest: '../dist'
                             }
                         ]

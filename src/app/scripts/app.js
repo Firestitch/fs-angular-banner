@@ -10,7 +10,8 @@ angular
     'ngAnimate',
     'ngStorage',
     'mdo-angular-cryptography',
-    'fs-angular-prettytime'
+    'fs-angular-banner',
+    'ngFileUpload'
 ])
 .config(function ($routeProvider, $cryptoProvider, $mdThemingProvider, CONFIG) {
     $routeProvider

@@ -2,7 +2,8 @@
   "name": "fs-angular-banner",
   "description": "",
   "main": [
-    "dist/banner.js"
+    "dist/banner.js",
+    "dist/_banner.scss"
   ],
   "authors": [
     "Firestitch Inc."
