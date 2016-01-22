@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('fs-angular-banner')
-    .factory('fsBanner', function (apiService) {
+    .factory('fsBanner', function () {
  
         function Banner(options) {
             this._options = options || {};

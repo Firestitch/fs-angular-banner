@@ -49,7 +49,7 @@
             replace: false,
             transclude: true,
             scope: {
-                options: "=bnOptions"
+                options: "=fsOptions"
             },
             link: function ($scope, element, attr) {
 
@@ -87,7 +87,7 @@
         };
     }
 
-    angular.module('app')
+    angular.module('fs-angular-banner')
     .directive('banner',banner)
     .directive('fsBanner',banner);
 })();

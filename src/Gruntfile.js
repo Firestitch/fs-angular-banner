@@ -52,7 +52,7 @@ module.exports = function(grunt) {
                         tasks: ['ngdocs']
                     },
                     buildscss: {
-                        files: ['app/styles/{,*/}*.scss'],
+                        files: ['app/styles/{,*/}*.*'],
                         tasks: ['clean:buildscss','copy:buildscss'] 
                     }
                     ,
@@ -205,7 +205,7 @@ module.exports = function(grunt) {
                         files: [{
                             dot: true,
                             src: [
-                                '../dist/*.scss'
+                                '../dist/*.*css'
                             ]
                         }]
                     },

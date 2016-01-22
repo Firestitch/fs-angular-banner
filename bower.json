@@ -3,7 +3,7 @@
   "description": "",
   "main": [
     "dist/banner.js",
-    "dist/_banner.scss"
+    "dist/banner.css"
   ],
   "authors": [
     "Firestitch Inc."
