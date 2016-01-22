@@ -13,6 +13,12 @@ fs-banner .avatar.clickable {
 	cursor: pointer;
 }
 
+fs-banner .avatar .md-button {
+	padding: 0;
+	margin: 0;
+}
+
+
 fs-banner .avatar .md-button.md-fab {
     line-height: 30px;
     width: 30px;
@@ -20,6 +26,7 @@ fs-banner .avatar .md-button.md-fab {
     min-height: 0;
     min-width: 0;
     vertical-align: middle;
+    text-align: center;
 }
 
 fs-banner .avatar .icon {
@@ -47,8 +54,8 @@ fs-banner .avatar .icon > .material-icons {
 fs-banner .avatar .action-icon {
 
     position: absolute;
-    right: 8%;
-    top: 8%;
+    right: 10%;
+    top: 10%;
     color: inherit;
 	text-decoration: none;
 }
