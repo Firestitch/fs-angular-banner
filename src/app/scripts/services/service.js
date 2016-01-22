@@ -27,10 +27,23 @@
                 this._options.avatar.action.upload = options;
             };
 
-            this.addAction = function(icon, click, options) {
-                var action = options || {};
-                action.click = click;
-                action.icon = icon;
+            this.addSubmitAction = function(icon, form, options) {
+                var options = options || {};
+                options.form = form;
+                this.addAction(icon, null, 'submit', options);
+            };
+
+            this.addClickAction = function(icon, func, options) {
+                this.addAction(icon, func, 'click', options);
+            };
+
+            this.addAction = function(icon, func, type, options) {
+                var options = options || {};
+                var action = {  func: func,
+                                icon: icon,
+                                options: options,
+                                type: type || 'click' };
+
                 this._options.actions.push(action);
             };
 

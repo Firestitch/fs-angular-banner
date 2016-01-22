@@ -77,6 +77,22 @@
                     $scope.options.avatar.action.upload.select(file);
                 }
 
+                $scope.actionClick = function(action, $event) {
+          
+                    $event.stopPropagation();
+
+                    if(action.type=='submit') {
+                        var form = document.querySelector('form[name="' + action.options.form + '"]');
+                        
+                        $timeout(function() {
+                            angular.element(form).trigger('submit');
+                        });
+                    
+                    } else if(action.type=='click') { 
+                        action.func();
+                    }
+                }
+
                 $scope.click = function(func, $event) {
                     if(func) {
                         $event.stopPropagation();

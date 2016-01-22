@@ -41,14 +41,16 @@ fs-banner .avatar .icon {
     text-align: center;
     background-position: 50% 50%;
     background-size: contain;
+    background-repeat: no-repeat;
 }
 
 fs-banner .avatar .icon > .material-icons {
-    font-size: 75px;
+    font-size: 55px;
     display: inline-block;
     color: #334;
     line-height: 75px;
     vertical-align: middle;
+    width: 75px;
 }
 
 fs-banner .avatar .action-icon {
@@ -62,7 +64,6 @@ fs-banner .avatar .action-icon {
 
 fs-banner .avatar .action-icon .material-icons {
     font-size: 18px;
-    line-height: 24px;
     width: 18px;
     height: 18px;
 }

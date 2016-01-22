@@ -14,7 +14,7 @@
         <h2 class="subheadline">{{options.subheadline}}</h2>
     </div>
     <div class="actions">
-        <md-button ng-repeat="action in options.actions" class="md-fab md-accent" aria-label="Save" type="{{action.type}}" ng-click="action.click($event)">
+        <md-button ng-repeat="action in options.actions" class="md-fab md-accent" aria-label="Save" type="{{action.type}}" ng-click="actionClick(action, $event)">
             <md-icon md-icon-set="material-icons">{{action.icon}}</md-icon>
         </md-button>
     </div>

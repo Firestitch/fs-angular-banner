@@ -87,6 +87,22 @@
                     $scope.options.avatar.action.upload.select(file);
                 }
 
+                $scope.actionClick = function(action, $event) {
+          
+                    $event.stopPropagation();
+
+                    if(action.type=='submit') {
+                        var form = document.querySelector('form[name="' + action.options.form + '"]');
+                        
+                        $timeout(function() {
+                            angular.element(form).trigger('submit');
+                        });
+                    
+                    } else if(action.type=='click') { 
+                        action.func();
+                    }
+                }
+
                 $scope.click = function(func, $event) {
                     if(func) {
                         $event.stopPropagation();
@@ -101,7 +117,6 @@
     .directive('banner',banner)
     .directive('fsBanner',banner);
 })();
-
 (function () {
     'use strict';
 
@@ -131,10 +146,23 @@
                 this._options.avatar.action.upload = options;
             };
 
-            this.addAction = function(icon, click, options) {
-                var action = options || {};
-                action.click = click;
-                action.icon = icon;
+            this.addSubmitAction = function(icon, form, options) {
+                var options = options || {};
+                options.form = form;
+                this.addAction(icon, null, 'submit', options);
+            };
+
+            this.addClickAction = function(icon, func, options) {
+                this.addAction(icon, func, 'click', options);
+            };
+
+            this.addAction = function(icon, func, type, options) {
+                var options = options || {};
+                var action = {  func: func,
+                                icon: icon,
+                                options: options,
+                                type: type || 'click' };
+
                 this._options.actions.push(action);
             };
 
@@ -209,7 +237,7 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
     "\n" +
     "    <div class=\"actions\">\r" +
     "\n" +
-    "        <md-button ng-repeat=\"action in options.actions\" class=\"md-fab md-accent\" aria-label=\"Save\" type=\"{{action.type}}\" ng-click=\"action.click($event)\">\r" +
+    "        <md-button ng-repeat=\"action in options.actions\" class=\"md-fab md-accent\" aria-label=\"Save\" type=\"{{action.type}}\" ng-click=\"actionClick(action, $event)\">\r" +
     "\n" +
     "            <md-icon md-icon-set=\"material-icons\">{{action.icon}}</md-icon>\r" +
     "\n" +
