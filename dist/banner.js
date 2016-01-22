@@ -92,17 +92,30 @@
                     $event.stopPropagation();
 
                     if(action.type=='submit') {
-                        var form = document.querySelector('form[name="' + action.options.form + '"]');
+                        var form = angular.element(document.querySelector('form[name="' + action.options.form + '"]'));
+
+                        if(form.length) {
+                            form.attr('action','javascript:;');
                         
-                        $timeout(function() {
-                            angular.element(form).trigger('submit');
-                        });
+                            $timeout(function() {
+                                angular.element(form).trigger('submit');
+                            });
+                        }
                     
                     } else if(action.type=='click') { 
                         action.func();
                     }
                 }
 
+                $scope.actionType = function(action) {
+
+                    if(action.type=='submit' && !action.options.form) {
+                        return 'submit';
+                    }
+
+                    return 'button';
+                }
+                
                 $scope.click = function(func, $event) {
                     if(func) {
                         $event.stopPropagation();
@@ -237,7 +250,7 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
     "\n" +
     "    <div class=\"actions\">\r" +
     "\n" +
-    "        <md-button ng-repeat=\"action in options.actions\" class=\"md-fab md-accent\" aria-label=\"Save\" type=\"{{action.type}}\" ng-click=\"actionClick(action, $event)\">\r" +
+    "        <md-button ng-repeat=\"action in options.actions\" class=\"md-fab md-accent\" aria-label=\"Save\" type=\"{{actionType(action)}}\" ng-click=\"actionClick(action, $event)\">\r" +
     "\n" +
     "            <md-icon md-icon-set=\"material-icons\">{{action.icon}}</md-icon>\r" +
     "\n" +
