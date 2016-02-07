@@ -128,7 +128,29 @@
 
     angular.module('fs-angular-banner')
     .directive('banner',banner)
-    .directive('fsBanner',banner);
+    .directive('fsBanner',banner)
+    .directive('bindCompile', ['$compile', function ($compile) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                scope.$watch(function () {
+                    return scope.$eval(attrs.bindCompile);
+                }, function (value) {
+                    // In case value is a TrustedValueHolderType, sometimes it
+                    // needs to be explicitly called into a string in order to
+                    // get the HTML string.
+                    element.html(value && value.toString());
+                    // If scope is provided use it, otherwise use parent scope
+                    var compileScope = scope;
+                   
+                    if (attrs.bindCompileScope) {
+                        compileScope = scope.$eval(attrs.bindCompileScope);
+                    }
+                    $compile(element.contents())(compileScope);
+                });
+            }
+        };
+    }]);    
 })();
 (function () {
     'use strict';
@@ -242,9 +264,9 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
     "\n" +
     "    <div>\r" +
     "\n" +
-    "        <h1 class=\"headline\">{{options.headline}}</h1>\r" +
+    "        <div class=\"headline\" ng-if=\"options.headline.template\" bind-compile=\"options.headline.template\" bind-compile-scope=\"options.headline.scope\"></div><div class=\"headline\" ng-if=\"!options.headline.template\">{{options.headline}}</div>\r" +
     "\n" +
-    "        <h2 class=\"subheadline\">{{options.subheadline}}</h2>\r" +
+    "        <div ng-if=\"options.subheadline.template\" bind-compile=\"options.subheadline.template\" bind-compile-scope=\"options.subheadline.scope\" class=\"subheadline\"></div><div class=\"subheadline\" ng-if=\"!options.subheadline.template\">{{options.subheadline}}</div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
