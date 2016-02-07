@@ -68,16 +68,17 @@ fs-banner .avatar .action-icon .material-icons {
     height: 18px;
 }
 
-fs-banner .subheadline {
-    color: #555;
-    margin: 0;
-}
-
 fs-banner .headline {
-    color: #222;
-    margin: 0 0 5px 0;
+    color: #111;
+    font-size: 23px;
+    margin: 0 0 2px 0;
 }
 
+fs-banner .subheadline {
+    color: #333;
+    margin: 0;
+    font-size: 18px;
+}
 fs-banner .actions {
     position: absolute;
     right: 35px;

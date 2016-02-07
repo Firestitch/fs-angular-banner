@@ -10,8 +10,8 @@
         </div>
     </div>
     <div>
-        <h1 class="headline">{{options.headline}}</h1>
-        <h2 class="subheadline">{{options.subheadline}}</h2>
+        <div class="headline" ng-if="options.headline.template" bind-compile="options.headline.template" bind-compile-scope="options.headline.scope"></div><div class="headline" ng-if="!options.headline.template">{{options.headline}}</div>
+        <div ng-if="options.subheadline.template" bind-compile="options.subheadline.template" bind-compile-scope="options.subheadline.scope" class="subheadline"></div><div class="subheadline" ng-if="!options.subheadline.template">{{options.subheadline}}</div>
     </div>
     <div class="actions">
         <md-button ng-repeat="action in options.actions" class="md-fab md-accent" aria-label="Save" type="{{actionType(action)}}" ng-click="actionClick(action, $event)">

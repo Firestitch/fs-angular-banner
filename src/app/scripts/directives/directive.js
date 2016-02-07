@@ -118,5 +118,27 @@
 
     angular.module('fs-angular-banner')
     .directive('banner',banner)
-    .directive('fsBanner',banner);
+    .directive('fsBanner',banner)
+    .directive('bindCompile', ['$compile', function ($compile) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                scope.$watch(function () {
+                    return scope.$eval(attrs.bindCompile);
+                }, function (value) {
+                    // In case value is a TrustedValueHolderType, sometimes it
+                    // needs to be explicitly called into a string in order to
+                    // get the HTML string.
+                    element.html(value && value.toString());
+                    // If scope is provided use it, otherwise use parent scope
+                    var compileScope = scope;
+                   
+                    if (attrs.bindCompileScope) {
+                        compileScope = scope.$eval(attrs.bindCompileScope);
+                    }
+                    $compile(element.contents())(compileScope);
+                });
+            }
+        };
+    }]);    
 })();
