@@ -129,23 +129,25 @@
     angular.module('fs-angular-banner')
     .directive('banner',banner)
     .directive('fsBanner',banner)
-    .directive('bindCompile', ['$compile', function ($compile) {
+    .directive('fsBannerBindCompile', ['$compile', function ($compile) {
         return {
             restrict: 'A',
-            link: function (scope, element, attrs) {
-                scope.$watch(function () {
-                    return scope.$eval(attrs.bindCompile);
+            link: function ($scope, element, attrs) {
+
+                $scope.$watch(function () {
+                    return $scope.$eval(attrs.fsBannerBindCompile);
                 }, function (value) {
                     // In case value is a TrustedValueHolderType, sometimes it
                     // needs to be explicitly called into a string in order to
                     // get the HTML string.
+
                     element.html(value && value.toString());
                     // If scope is provided use it, otherwise use parent scope
-                    var compileScope = scope;
-                   
-                    if (attrs.bindCompileScope) {
-                        compileScope = scope.$eval(attrs.bindCompileScope);
+                    var compileScope = $scope;
+                    if (attrs.fsBannerBindCompileScope) {
+                        compileScope = angular.extend($scope,$scope.$eval(attrs.fsBannerBindCompileScope));
                     }
+
                     $compile(element.contents())(compileScope);
                 });
             }
@@ -191,6 +193,17 @@
                 this.addAction(icon, func, 'click', options);
             };
 
+            this.addActionTemplate = function(template, scope, options) {
+                var options = options || {};
+                var action = {  options: options,
+                                template: template,
+                                type: 'template',
+                                scope: scope };
+
+                this._options.actions.push(action);
+            };
+
+
             this.addAction = function(icon, func, type, options) {
                 var options = options || {};
                 var action = {  func: func,
@@ -205,8 +218,16 @@
                 this._options.headline = headline;
             };
 
+            this.headlineTemplate = function(template, scope) {
+                this._options.headline = { template: template, scope: scope };
+            };
+
             this.subheadline = function(subheadline) {
                 this._options.subheadline = subheadline;
+            };
+
+            this.subheadlineTemplate = function(template, scope) {
+                this._options.subheadline = { template: template, scope: scope };
             };
 
             this.avatarImage = function(image) {
@@ -240,8 +261,6 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
   'use strict';
 
   $templateCache.put('views/directives/banner.html',
-    "\r" +
-    "\n" +
     "<md-toolbar layout=\"row\" layout-align=\"start center\" style=\"{{ options.styles }}\">\r" +
     "\n" +
     "    <div class=\"avatar\" ng-class=\"{ clickable: options.avatar.click }\" ng-click=\"click(options.avatar.click, $event)\">\r" +
@@ -264,19 +283,37 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
     "\n" +
     "    <div>\r" +
     "\n" +
-    "        <div class=\"headline\" ng-if=\"options.headline.template\" bind-compile=\"options.headline.template\" bind-compile-scope=\"options.headline.scope\"></div><div class=\"headline\" ng-if=\"!options.headline.template\">{{options.headline}}</div>\r" +
+    "        <div class=\"headline\" ng-if=\"options.headline.template\" fs-banner-bind-compile=\"options.headline.template\" fs-banner-bind-compile-scope=\"options.headline.scope\"></div>\r" +
     "\n" +
-    "        <div ng-if=\"options.subheadline.template\" bind-compile=\"options.subheadline.template\" bind-compile-scope=\"options.subheadline.scope\" class=\"subheadline\"></div><div class=\"subheadline\" ng-if=\"!options.subheadline.template\">{{options.subheadline}}</div>\r" +
+    "        <div class=\"headline\" ng-if=\"!options.headline.template\">{{options.headline}}</div>\r" +
+    "\n" +
+    "        <div ng-if=\"options.subheadline.template\" fs-banner-bind-compile=\"options.subheadline.template\" fs-banner-bind-compile-scope=\"options.subheadline.scope\" class=\"subheadline\"></div>\r" +
+    "\n" +
+    "        <div class=\"subheadline\" ng-if=\"!options.subheadline.template\">{{options.subheadline}}</div>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
     "    <div class=\"actions\">\r" +
     "\n" +
-    "        <md-button ng-repeat=\"action in options.actions\" class=\"md-fab md-accent\" aria-label=\"Save\" type=\"{{actionType(action)}}\" ng-click=\"actionClick(action, $event)\">\r" +
+    "        <span style=\"display: inline-flex;\" ng-repeat=\"action in options.actions\">\r" +
     "\n" +
-    "            <md-icon md-icon-set=\"material-icons\">{{action.icon}}</md-icon>\r" +
+    "\r" +
     "\n" +
-    "        </md-button>\r" +
+    "            <span ng-if=\"action.type=='template'\" fs-banner-bind-compile=\"action.template\" fs-banner-bind-compile-scope=\"action.scope\"></span>\r" +
+    "\n" +
+    "            <span ng-if=\"action.type=='submit' || action.type=='click'\">\r" +
+    "\n" +
+    "                <md-button class=\"md-fab md-accent\" aria-label=\"Save\" type=\"{{actionType(action)}}\" ng-click=\"actionClick(action, $event)\">\r" +
+    "\n" +
+    "                    <md-icon md-icon-set=\"material-icons\">{{action.icon}}</md-icon>\r" +
+    "\n" +
+    "                </md-button>\r" +
+    "\n" +
+    "            </span>\r" +
+    "\n" +
+    "\r" +
+    "\n" +
+    "        </span>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +

@@ -37,6 +37,17 @@
                 this.addAction(icon, func, 'click', options);
             };
 
+            this.addActionTemplate = function(template, scope, options) {
+                var options = options || {};
+                var action = {  options: options,
+                                template: template,
+                                type: 'template',
+                                scope: scope };
+
+                this._options.actions.push(action);
+            };
+
+
             this.addAction = function(icon, func, type, options) {
                 var options = options || {};
                 var action = {  func: func,
@@ -51,8 +62,16 @@
                 this._options.headline = headline;
             };
 
+            this.headlineTemplate = function(template, scope) {
+                this._options.headline = { template: template, scope: scope };
+            };
+
             this.subheadline = function(subheadline) {
                 this._options.subheadline = subheadline;
+            };
+
+            this.subheadlineTemplate = function(template, scope) {
+                this._options.subheadline = { template: template, scope: scope };
             };
 
             this.avatarImage = function(image) {
