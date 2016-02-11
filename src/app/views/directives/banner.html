@@ -8,7 +8,7 @@
             <md-icon>{{options.avatar.icon}}</md-icon>
         </div>
     </div>
-    <div>
+    <div flex>
         <div class="headline" ng-if="options.headline.template" fs-banner-bind-compile="options.headline.template" fs-banner-bind-compile-scope="options.headline.scope"></div>
         <div class="headline" ng-if="!options.headline.template">{{options.headline}}</div>
         <div ng-if="options.subheadline.template" fs-banner-bind-compile="options.subheadline.template" fs-banner-bind-compile-scope="options.subheadline.scope" class="subheadline"></div>
