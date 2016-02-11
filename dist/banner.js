@@ -52,7 +52,7 @@
         </tbody></table>
      */
 
-    var banner = function ($compile, fsBanner, $timeout) {
+    var banner = function ($compile, fsBanner, $timeout, $window) {
         return {
             templateUrl: 'views/directives/banner.html',
             restrict: 'E',
@@ -62,6 +62,22 @@
                 options: "=fsOptions"
             },
             link: function ($scope, element, attr) {
+
+
+                $timeout(function() {
+                    var actions = angular.element(element).find('.actions');
+
+                    var top = actions.offset().top - angular.element('.header .md-toolbar-tools').height();                 
+
+                    angular.element($window).bind("scroll", function() {
+                        if (this.pageYOffset >= top) {
+                            actions.addClass('fixed');
+                        } else {
+                            actions.removeClass('fixed');
+                        }
+                    });
+
+                });
 
                 $scope.options = fsBanner.create($scope.options).options();
 
@@ -145,7 +161,9 @@
                     // If scope is provided use it, otherwise use parent scope
                     var compileScope = $scope;
                     if (attrs.fsBannerBindCompileScope) {
-                        compileScope = angular.extend($scope,$scope.$eval(attrs.fsBannerBindCompileScope));
+                        
+                        var scope = $scope.$eval(attrs.fsBannerBindCompileScope);
+                        compileScope = scope.constructor.name=='Scope' ? scope : angular.extend($scope,scope);
                     }
 
                     $compile(element.contents())(compileScope);

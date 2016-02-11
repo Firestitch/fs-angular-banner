@@ -91,3 +91,9 @@ fs-banner .actions .material-icons {
     width: 28px;
     height: 28px;    
 }
+
+fs-banner .actions.fixed {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
