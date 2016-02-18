@@ -1,13 +1,5 @@
-(function () {
-    'use strict';
-    
-	angular.module('fs-angular-banner',[]);
-})();
-(function () {
-    'use strict';
+(function () { angular.module('fs-angular-banner',[]); })();
 
-
-})();
 (function () {
     'use strict';
 
@@ -320,7 +312,7 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
     "\n" +
     "    <div class=\"actions\">\r" +
     "\n" +
-    "        <span style=\"display: inline-flex;\" ng-repeat=\"action in options.actions\">\r" +
+    "        <span class=\"action\" ng-repeat=\"action in options.actions\">\r" +
     "\n" +
     "\r" +
     "\n" +

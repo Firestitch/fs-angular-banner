@@ -13,7 +13,7 @@ angular
     'fs-angular-banner',
     'ngFileUpload'
 ])
-.config(function ($routeProvider, $cryptoProvider, $mdThemingProvider, CONFIG) {
+.config(function ($routeProvider, $cryptoProvider, $mdThemingProvider) {
     $routeProvider
     .when('/demo', {
         templateUrl: 'views/demo.html',

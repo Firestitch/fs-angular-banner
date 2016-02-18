@@ -15,7 +15,7 @@
         <div class="subheadline" ng-if="!options.subheadline.template">{{options.subheadline}}</div>
     </div>
     <div class="actions">
-        <span style="display: inline-flex;" ng-repeat="action in options.actions">
+        <span class="action" ng-repeat="action in options.actions">
 
             <span ng-if="action.type=='template'" fs-banner-bind-compile="action.template" fs-banner-bind-compile-scope="action.scope"></span>
             <span ng-if="action.type=='submit' || action.type=='click'">

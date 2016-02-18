@@ -1,5 +1,1 @@
-(function () {
-    'use strict';
-    
-	angular.module('fs-angular-banner',[]);
-})();
+(function () { angular.module('fs-angular-banner',[]); })();
