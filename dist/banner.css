@@ -1,8 +1,5 @@
-fs-banner {
+fs-banner > div {
     position: relative;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
 }
 
 fs-banner .avatar {
@@ -81,7 +78,7 @@ fs-banner .subheadline {
 }
 fs-banner .actions {
     position: absolute;
-    right: 35px;
+    right: 8px;
     bottom: -28px;  
 }
 
@@ -89,11 +86,10 @@ fs-banner .actions .material-icons {
     font-size: 28px;
     line-height: 28px;
     width: 28px;
-    height: 28px;    
+    height: 28px;
 }
 
 fs-banner .actions.fixed {
     position: fixed;
-    right: 20px;
-    bottom: 20px;
+    bottom: 5px;
 }

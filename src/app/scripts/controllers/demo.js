@@ -43,6 +43,15 @@
                             function() {
                                 alert('save()');
                             });
+
+    banner.addSubmitAction('save','form');
+
     $scope.bannerOptions = banner.options();
+
+    $scope.text = '';
+    
+    $scope.submit = function() {
+        alert('submit');
+    }
 });
 

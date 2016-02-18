@@ -63,22 +63,24 @@
             },
             link: function ($scope, element, attr) {
 
+                var scroll = function() {
 
-                $timeout(function() {
-                    var actions = angular.element(element).find('.actions');
+                    if (this.pageYOffset >= top) {
+                        actions.addClass('fixed');
+                    } else {
+                        actions.removeClass('fixed');
+                    }
+                }
 
-                    var top = actions.offset().top - angular.element('.header .md-toolbar-tools').height();                 
+                var actions = angular.element(element[0].querySelector('.actions'));
+                var top = actions.prop('offsetTop') + actions.prop('offsetTop');
 
-                    angular.element($window).bind("scroll", function() {
-                        if (this.pageYOffset >= top) {
-                            actions.addClass('fixed');
-                        } else {
-                            actions.removeClass('fixed');
-                        }
-                    });
+                angular.element($window).on("scroll",scroll);
 
+                $scope.$on('$destroy', function () {
+                    angular.element($window).off("scroll",scroll);
                 });
-
+          
                 $scope.options = fsBanner.create($scope.options).options();
 
                 var avatarAction = angular.element(document.querySelector('.action-icon'));
@@ -113,9 +115,12 @@
                         if(form.length) {
                             form.attr('action','javascript:;');
                         
-                            $timeout(function() {
-                                angular.element(form).trigger('submit');
-                            });
+                            var button = angular.element('<button>',{ type: 'submit', style: 'display:none' });
+
+                            form.append(button);
+                            
+                            button[0].click();
+                            button.remove();
                         }
                     
                     } else if(action.type=='click') { 
@@ -163,7 +168,9 @@
                     if (attrs.fsBannerBindCompileScope) {
                         
                         var scope = $scope.$eval(attrs.fsBannerBindCompileScope);
-                        compileScope = scope.constructor.name=='Scope' ? scope : angular.extend($scope,scope);
+                        if(scope) {
+                            compileScope = scope.constructor.name=='Scope' ? scope : angular.extend($scope,scope);
+                        }
                     }
 
                     $compile(element.contents())(compileScope);
@@ -173,113 +180,113 @@
     }]);    
 })();
 (function () {
-    'use strict';
+    'use strict';
 
-    angular.module('fs-angular-banner')
-    .factory('fsBanner', function () {
- 
-        function Banner(options) {
-            this._options = options || {};
-            this._options.avatar = this._options.avatar || {};
-            this._options.actions = this._options.actions || [];
-            this._options.avatar.action = this._options.avatar.action || {};
-            this._options.styles = this._options.styles || '';
+    angular.module('fs-angular-banner')
+    .factory('fsBanner', function () {
+ 
+        function Banner(options) {
+            this._options = options || {};
+            this._options.avatar = this._options.avatar || {};
+            this._options.actions = this._options.actions || [];
+            this._options.avatar.action = this._options.avatar.action || {};
+            this._options.styles = this._options.styles || '';
 
-            this.avatarActionClick = function(icon, func) {
-                this._options.avatar.action.icon = icon;
-                this._options.avatar.action.click = func;
-            };
+            this.avatarActionClick = function(icon, func) {
+                this._options.avatar.action.icon = icon;
+                this._options.avatar.action.click = func;
+            };
 
-            this.background = function(background) {
-                this._options.styles = "background-image: url('" + background + "');";
-            };
+            this.background = function(background) {
+                this._options.styles = "background-image: url('" + background + "');";
+            };
 
-            this.avatarActionUpload = function(icon, func, options) {
-                options = options || {};
-                options.select = func;
-                this._options.avatar.action.icon = icon;
-                this._options.avatar.action.upload = options;
-            };
+            this.avatarActionUpload = function(icon, func, options) {
+                options = options || {};
+                options.select = func;
+                this._options.avatar.action.icon = icon;
+                this._options.avatar.action.upload = options;
+            };
 
-            this.addSubmitAction = function(icon, form, options) {
-                var options = options || {};
-                options.form = form;
-                this.addAction(icon, null, 'submit', options);
-            };
+            this.addSubmitAction = function(icon, form, options) {
+                var options = options || {};
+                options.form = form;
+                this.addAction(icon, null, 'submit', options);
+            };
 
-            this.addClickAction = function(icon, func, options) {
-                this.addAction(icon, func, 'click', options);
-            };
+            this.addClickAction = function(icon, func, options) {
+                this.addAction(icon, func, 'click', options);
+            };
 
-            this.addActionTemplate = function(template, scope, options) {
-                var options = options || {};
-                var action = {  options: options,
-                                template: template,
-                                type: 'template',
-                                scope: scope };
+            this.addActionTemplate = function(template, scope, options) {
+                var options = options || {};
+                var action = {  options: options,
+                                template: template,
+                                type: 'template',
+                                scope: scope };
 
-                this._options.actions.push(action);
-            };
+                this._options.actions.push(action);
+            };
 
 
-            this.addAction = function(icon, func, type, options) {
-                var options = options || {};
-                var action = {  func: func,
-                                icon: icon,
-                                options: options,
-                                type: type || 'click' };
+            this.addAction = function(icon, func, type, options) {
+                var options = options || {};
+                var action = {  func: func,
+                                icon: icon,
+                                options: options,
+                                type: type || 'click' };
 
-                this._options.actions.push(action);
-            };
+                this._options.actions.push(action);
+            };
 
-            this.headline = function(headline) {
-                this._options.headline = headline;
-            };
+            this.headline = function(headline) {
+                this._options.headline = headline;
+            };
 
-            this.headlineTemplate = function(template, scope) {
-                this._options.headline = { template: template, scope: scope };
-            };
+            this.headlineTemplate = function(template, scope) {
+                this._options.headline = { template: template, scope: scope };
+            };
 
-            this.subheadline = function(subheadline) {
-                this._options.subheadline = subheadline;
-            };
+            this.subheadline = function(subheadline) {
+                this._options.subheadline = subheadline;
+            };
 
-            this.subheadlineTemplate = function(template, scope) {
-                this._options.subheadline = { template: template, scope: scope };
-            };
+            this.subheadlineTemplate = function(template, scope) {
+                this._options.subheadline = { template: template, scope: scope };
+            };
 
-            this.avatarImage = function(image) {
-                this._options.avatar.image = image;
-            };
+            this.avatarImage = function(image) {
+                this._options.avatar.image = image;
+            };
 
-            this.avatarIcon = function(icon) {
-                this._options.avatar.icon = icon;
-            };
+            this.avatarIcon = function(icon) {
+                this._options.avatar.icon = icon;
+            };
 
-            this.options = function() {
-                return this._options;
-            };
+            this.options = function() {
+                return this._options;
+            };
 
-            return this;
-        }
+            return this;
+        }
 
-        var service = {
-            create: create
-        };
-       
-        return service;
+        var service = {
+            create: create
+        };
+       
+        return service;
 
-        function create(options) {
-            return new Banner(options); 
-        }
+        function create(options) {
+            return new Banner(options); 
+        }
 
-    });
-})();
+    });
+})();
 angular.module('fs-angular-banner').run(['$templateCache', function($templateCache) {
   'use strict';
 
   $templateCache.put('views/directives/banner.html',
-    "<md-toolbar layout=\"row\" layout-align=\"start center\" style=\"{{ options.styles }}\">\r" +
+    "<div layout=\"row\" layout-align=\"start center\" style=\"{{ options.styles }}\">\r" +
     "\n" +
     "    <div class=\"avatar\" ng-class=\"{ clickable: options.avatar.click }\" ng-click=\"click(options.avatar.click, $event)\">\r" +
     "\n" +
@@ -289,7 +296,7 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
     "\n" +
     "        </md-button>\r" +
     "\n" +
-    "        <div class=\"icon\" ng-show=\"options.avatar.image\" style=\"background-image: url('{{options.avatar.image}}')\"></div>\r" +
+    "        <div class=\"icon\" ng-if=\"options.avatar.image\" style=\"background-image: url('{{options.avatar.image}}')\"></div>\r" +
     "\n" +
     "        <div class=\"icon\" ng-show=\"!options.avatar.image\">\r" +
     "\n" +
@@ -335,8 +342,7 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
     "\n" +
     "    </div>\r" +
     "\n" +
-    "</md-toolbar>\r" +
-    "\n"
+    "</div>"
   );
 
 }]);

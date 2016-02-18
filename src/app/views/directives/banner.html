@@ -1,9 +1,9 @@
-<md-toolbar layout="row" layout-align="start center" style="{{ options.styles }}">
+<div layout="row" layout-align="start center" style="{{ options.styles }}">
     <div class="avatar" ng-class="{ clickable: options.avatar.click }" ng-click="click(options.avatar.click, $event)">
         <md-button ng-show="options.avatar.action.icon" class="md-fab action-icon">
             <md-icon>{{options.avatar.action.icon}}</md-icon>
         </md-button>
-        <div class="icon" ng-show="options.avatar.image" style="background-image: url('{{options.avatar.image}}')"></div>
+        <div class="icon" ng-if="options.avatar.image" style="background-image: url('{{options.avatar.image}}')"></div>
         <div class="icon" ng-show="!options.avatar.image">
             <md-icon>{{options.avatar.icon}}</md-icon>
         </div>
@@ -26,4 +26,4 @@
 
         </span>
     </div>
-</md-toolbar>
+</div>

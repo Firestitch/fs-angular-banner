@@ -53,22 +53,24 @@
             },
             link: function ($scope, element, attr) {
 
+                var scroll = function() {
 
-                $timeout(function() {
-                    var actions = angular.element(element).find('.actions');
+                    if (this.pageYOffset >= top) {
+                        actions.addClass('fixed');
+                    } else {
+                        actions.removeClass('fixed');
+                    }
+                }
 
-                    var top = actions.offset().top - angular.element('.header .md-toolbar-tools').height();                 
+                var actions = angular.element(element[0].querySelector('.actions'));
+                var top = actions.prop('offsetTop') + actions.prop('offsetTop');
 
-                    angular.element($window).bind("scroll", function() {
-                        if (this.pageYOffset >= top) {
-                            actions.addClass('fixed');
-                        } else {
-                            actions.removeClass('fixed');
-                        }
-                    });
+                angular.element($window).on("scroll",scroll);
 
+                $scope.$on('$destroy', function () {
+                    angular.element($window).off("scroll",scroll);
                 });
-
+          
                 $scope.options = fsBanner.create($scope.options).options();
 
                 var avatarAction = angular.element(document.querySelector('.action-icon'));
@@ -103,9 +105,12 @@
                         if(form.length) {
                             form.attr('action','javascript:;');
                         
-                            $timeout(function() {
-                                angular.element(form).trigger('submit');
-                            });
+                            var button = angular.element('<button>',{ type: 'submit', style: 'display:none' });
+
+                            form.append(button);
+                            
+                            button[0].click();
+                            button.remove();
                         }
                     
                     } else if(action.type=='click') { 
@@ -153,7 +158,9 @@
                     if (attrs.fsBannerBindCompileScope) {
                         
                         var scope = $scope.$eval(attrs.fsBannerBindCompileScope);
-                        compileScope = scope.constructor.name=='Scope' ? scope : angular.extend($scope,scope);
+                        if(scope) {
+                            compileScope = scope.constructor.name=='Scope' ? scope : angular.extend($scope,scope);
+                        }
                     }
 
                     $compile(element.contents())(compileScope);
