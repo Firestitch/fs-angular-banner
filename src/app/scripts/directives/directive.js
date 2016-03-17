@@ -49,7 +49,8 @@
             replace: false,
             transclude: true,
             scope: {
-                options: "=fsOptions"
+                options: "=fsOptions",
+                instance: "=?fsInstance"
             },
             link: function ($scope, element, attr) {
 
@@ -70,26 +71,12 @@
                 $scope.$on('$destroy', function () {
                     angular.element($window).off("scroll",scroll);
                 });
-          
-                $scope.options = fsBanner.create($scope.options).options();
+                
+                $scope.instance = fsBanner.create($scope.options);
 
-                var avatarAction = angular.element(document.querySelector('.action-icon'));
-  
-                if($scope.options.avatar.action.upload) {
-
-                    avatarAction.removeAttr('ng-transclude');
-                   
-                    angular.forEach($scope.options.avatar.action.upload,function(value, name) {
-                        
-                        if(name=='select')
-                            return;
-
-                        avatarAction.attr(name,value);
-                    });
-
-                    avatarAction.attr('ngf-select','upload($files)');
-                    $compile(avatarAction)($scope);
-                }
+                $scope.$watch('instance.options',function(options) {
+                    $scope.options = $scope.instance.options();
+                });
 
                 $scope.upload = function(file) {
                     $scope.options.avatar.action.upload.select(file);

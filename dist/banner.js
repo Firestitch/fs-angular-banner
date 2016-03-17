@@ -51,7 +51,8 @@
             replace: false,
             transclude: true,
             scope: {
-                options: "=fsOptions"
+                options: "=fsOptions",
+                instance: "=?fsInstance"
             },
             link: function ($scope, element, attr) {
 
@@ -72,26 +73,12 @@
                 $scope.$on('$destroy', function () {
                     angular.element($window).off("scroll",scroll);
                 });
-          
-                $scope.options = fsBanner.create($scope.options).options();
+                
+                $scope.instance = fsBanner.create($scope.options);
 
-                var avatarAction = angular.element(document.querySelector('.action-icon'));
-  
-                if($scope.options.avatar.action.upload) {
-
-                    avatarAction.removeAttr('ng-transclude');
-                   
-                    angular.forEach($scope.options.avatar.action.upload,function(value, name) {
-                        
-                        if(name=='select')
-                            return;
-
-                        avatarAction.attr(name,value);
-                    });
-
-                    avatarAction.attr('ngf-select','upload($files)');
-                    $compile(avatarAction)($scope);
-                }
+                $scope.$watch('instance.options',function(options) {
+                    $scope.options = $scope.instance.options();
+                });
 
                 $scope.upload = function(file) {
                     $scope.options.avatar.action.upload.select(file);
@@ -187,10 +174,12 @@
             this.avatarActionClick = function(icon, func) {
                 this._options.avatar.action.icon = icon;
                 this._options.avatar.action.click = func;
+                return this;
             };
 
             this.background = function(background) {
                 this._options.styles = "background-image: url('" + background + "');";
+                return this;
             };
 
             this.avatarActionUpload = function(icon, func, options) {
@@ -198,16 +187,19 @@
                 options.select = func;
                 this._options.avatar.action.icon = icon;
                 this._options.avatar.action.upload = options;
+                return this;
             };
 
             this.addSubmitAction = function(icon, form, options) {
                 var options = options || {};
                 options.form = form;
                 this.addAction(icon, null, 'submit', options);
+                return this;
             };
 
             this.addClickAction = function(icon, func, options) {
                 this.addAction(icon, func, 'click', options);
+                return this;
             };
 
             this.addActionTemplate = function(template, scope, options) {
@@ -218,6 +210,7 @@
                                 scope: scope };
 
                 this._options.actions.push(action);
+                return this;
             };
 
 
@@ -229,30 +222,37 @@
                                 type: type || 'click' };
 
                 this._options.actions.push(action);
+                return this;
             };
 
             this.headline = function(headline) {
                 this._options.headline = headline;
+                return this;
             };
 
             this.headlineTemplate = function(template, scope) {
                 this._options.headline = { template: template, scope: scope };
+                return this;
             };
 
             this.subheadline = function(subheadline) {
                 this._options.subheadline = subheadline;
+                return this;
             };
 
             this.subheadlineTemplate = function(template, scope) {
                 this._options.subheadline = { template: template, scope: scope };
+                return this;
             };
 
             this.avatarImage = function(image) {
                 this._options.avatar.image = image;
+                return this;
             };
 
             this.avatarIcon = function(icon) {
                 this._options.avatar.icon = icon;
+                return this;
             };
 
             this.options = function() {
@@ -282,7 +282,13 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
     "\n" +
     "    <div class=\"avatar\" ng-class=\"{ clickable: options.avatar.click }\" ng-click=\"click(options.avatar.click, $event)\">\r" +
     "\n" +
-    "        <md-button ng-show=\"options.avatar.action.icon\" class=\"md-fab action-icon\">\r" +
+    "        <md-button ng-show=\"options.avatar.action.icon && options.avatar.action.upload\" class=\"md-fab action-icon\" ngf-select=\"upload($files)\">\r" +
+    "\n" +
+    "            <md-icon>{{options.avatar.action.icon}}</md-icon>\r" +
+    "\n" +
+    "        </md-button>\r" +
+    "\n" +
+    "        <md-button ng-show=\"options.avatar.action.icon && !options.avatar.action.upload\" class=\"md-fab action-icon\">\r" +
     "\n" +
     "            <md-icon>{{options.avatar.action.icon}}</md-icon>\r" +
     "\n" +
