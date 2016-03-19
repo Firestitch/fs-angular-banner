@@ -213,7 +213,16 @@
                 return this;
             };
 
+            this.clearActions = function() {
+                this._options.actions = [];
+                return this;
+            };
 
+            this.clearAvatarAction = function() {
+                this._options.avatar.action = {};
+                return this;
+            };
+            
             this.addAction = function(icon, func, type, options) {
                 var options = options || {};
                 var action = {  func: func,
