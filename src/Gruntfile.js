@@ -85,11 +85,11 @@ module.exports = function(grunt) {
                 // The actual grunt server settings
                 connect: {
                     options: {
-                        livereload: 35730
+                        livereload: 32730
                     },
                     local: {
                         options: {
-                            port: 9090,
+                            port: 9096,
                             hostname: 'localhost',
                             open: true,
                             base: [
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
                     },
                     docs: {
                         options: {
-                            port: 9001,
+                            port: 9108,
                             hostname: 'localhost',
                             base: '../../gh-pages/',
                             open: true
