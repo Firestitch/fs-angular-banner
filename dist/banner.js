@@ -287,69 +287,65 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
   'use strict';
 
   $templateCache.put('views/directives/banner.html',
-    "<div>\r" +
+    "<div layout=\"row\" layout-align=\"start center\" style=\"{{ options.styles }}\">\r" +
     "\n" +
-    "    <div layout=\"row\" layout-align=\"start center\" style=\"{{ options.styles }}\">\r" +
+    "    <div class=\"avatar\" ng-class=\"{ clickable: options.avatar.click }\" ng-click=\"click(options.avatar.click, $event)\">\r" +
     "\n" +
-    "        <div class=\"avatar\" ng-class=\"{ clickable: options.avatar.click }\" ng-click=\"click(options.avatar.click, $event)\">\r" +
+    "        <md-button ng-show=\"options.avatar.action.icon && options.avatar.action.upload\" class=\"md-fab action-icon\" ngf-select=\"upload($files)\">\r" +
     "\n" +
-    "            <md-button ng-show=\"options.avatar.action.icon && options.avatar.action.upload\" class=\"md-fab action-icon\" ngf-select=\"upload($files)\">\r" +
+    "            <md-icon>{{options.avatar.action.icon}}</md-icon>\r" +
     "\n" +
-    "                <md-icon>{{options.avatar.action.icon}}</md-icon>\r" +
+    "        </md-button>\r" +
     "\n" +
-    "            </md-button>\r" +
+    "        <md-button ng-show=\"options.avatar.action.icon && !options.avatar.action.upload\" class=\"md-fab action-icon\">\r" +
     "\n" +
-    "            <md-button ng-show=\"options.avatar.action.icon && !options.avatar.action.upload\" class=\"md-fab action-icon\">\r" +
+    "            <md-icon>{{options.avatar.action.icon}}</md-icon>\r" +
     "\n" +
-    "                <md-icon>{{options.avatar.action.icon}}</md-icon>\r" +
+    "        </md-button>\r" +
     "\n" +
-    "            </md-button>\r" +
+    "        <div class=\"icon\" ng-if=\"options.avatar.image\" style=\"background-image: url('{{options.avatar.image}}')\"></div>\r" +
     "\n" +
-    "            <div class=\"icon\" ng-if=\"options.avatar.image\" style=\"background-image: url('{{options.avatar.image}}')\"></div>\r" +
+    "        <div class=\"icon\" ng-show=\"!options.avatar.image\">\r" +
     "\n" +
-    "            <div class=\"icon\" ng-show=\"!options.avatar.image\">\r" +
-    "\n" +
-    "                <md-icon>{{options.avatar.icon}}</md-icon>\r" +
-    "\n" +
-    "            </div>\r" +
+    "            <md-icon>{{options.avatar.icon}}</md-icon>\r" +
     "\n" +
     "        </div>\r" +
     "\n" +
-    "        <div flex>\r" +
+    "    </div>\r" +
     "\n" +
-    "            <div class=\"headline\" ng-if=\"options.headline.template\" fs-banner-bind-compile=\"options.headline.template\" fs-banner-bind-compile-scope=\"options.headline.scope\"></div>\r" +
+    "    <div flex>\r" +
     "\n" +
-    "            <div class=\"headline\" ng-if=\"!options.headline.template\">{{options.headline}}</div>\r" +
+    "        <div class=\"headline\" ng-if=\"options.headline.template\" fs-banner-bind-compile=\"options.headline.template\" fs-banner-bind-compile-scope=\"options.headline.scope\"></div>\r" +
     "\n" +
-    "            <div ng-if=\"options.subheadline.template\" fs-banner-bind-compile=\"options.subheadline.template\" fs-banner-bind-compile-scope=\"options.subheadline.scope\" class=\"subheadline\"></div>\r" +
+    "        <div class=\"headline\" ng-if=\"!options.headline.template\">{{options.headline}}</div>\r" +
     "\n" +
-    "            <div class=\"subheadline\" ng-if=\"!options.subheadline.template\">{{options.subheadline}}</div>\r" +
+    "        <div ng-if=\"options.subheadline.template\" fs-banner-bind-compile=\"options.subheadline.template\" fs-banner-bind-compile-scope=\"options.subheadline.scope\" class=\"subheadline\"></div>\r" +
     "\n" +
-    "        </div>\r" +
+    "        <div class=\"subheadline\" ng-if=\"!options.subheadline.template\">{{options.subheadline}}</div>\r" +
     "\n" +
-    "        <div class=\"actions\">\r" +
+    "    </div>\r" +
     "\n" +
-    "            <span class=\"action\" ng-repeat=\"action in options.actions\">\r" +
+    "    <div class=\"actions\">\r" +
     "\n" +
-    "\r" +
-    "\n" +
-    "                <span ng-if=\"action.type=='template'\" fs-banner-bind-compile=\"action.template\" fs-banner-bind-compile-scope=\"action.scope\"></span>\r" +
-    "\n" +
-    "                <span ng-if=\"action.type=='submit' || action.type=='click'\">\r" +
-    "\n" +
-    "                    <md-button class=\"md-fab md-accent\" aria-label=\"Save\" type=\"{{actionType(action)}}\" ng-click=\"actionClick(action, $event)\">\r" +
-    "\n" +
-    "                        <md-icon md-icon-set=\"material-icons\">{{action.icon}}</md-icon>\r" +
-    "\n" +
-    "                    </md-button>\r" +
-    "\n" +
-    "                </span>\r" +
+    "        <span class=\"action\" ng-repeat=\"action in options.actions\">\r" +
     "\n" +
     "\r" +
+    "\n" +
+    "            <span ng-if=\"action.type=='template'\" fs-banner-bind-compile=\"action.template\" fs-banner-bind-compile-scope=\"action.scope\"></span>\r" +
+    "\n" +
+    "            <span ng-if=\"action.type=='submit' || action.type=='click'\">\r" +
+    "\n" +
+    "                <md-button class=\"md-fab md-accent\" aria-label=\"Save\" type=\"{{actionType(action)}}\" ng-click=\"actionClick(action, $event)\">\r" +
+    "\n" +
+    "                    <md-icon md-icon-set=\"material-icons\">{{action.icon}}</md-icon>\r" +
+    "\n" +
+    "                </md-button>\r" +
     "\n" +
     "            </span>\r" +
     "\n" +
-    "        </div>\r" +
+    "\r" +
+    "\n" +
+    "        </span>\r" +
     "\n" +
     "    </div>\r" +
     "\n" +
