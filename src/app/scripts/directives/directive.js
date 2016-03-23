@@ -49,7 +49,7 @@
             replace: false,
             transclude: true,
             scope: {
-                options: "=fsOptions",
+                options: "=?fsOptions",
                 instance: "=?fsInstance"
             },
             link: function ($scope, element, attr) {
