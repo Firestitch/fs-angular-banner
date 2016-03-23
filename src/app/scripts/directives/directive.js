@@ -72,8 +72,10 @@
                     angular.element($window).off("scroll",scroll);
                 });
                 
-                $scope.instance = fsBanner.create($scope.options);
-
+                if(!$scope.instance) {
+                    $scope.instance = fsBanner.create($scope.options);
+                }
+                
                 $scope.$watch('instance.options',function(options) {
                     $scope.options = $scope.instance.options();
                 });
@@ -154,5 +156,5 @@
                 });
             }
         };
-    }]);    
+    }]);
 })();

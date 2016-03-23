@@ -74,8 +74,10 @@
                     angular.element($window).off("scroll",scroll);
                 });
                 
-                $scope.instance = fsBanner.create($scope.options);
-
+                if(!$scope.instance) {
+                    $scope.instance = fsBanner.create($scope.options);
+                }
+                
                 $scope.$watch('instance.options',function(options) {
                     $scope.options = $scope.instance.options();
                 });
@@ -156,7 +158,7 @@
                 });
             }
         };
-    }]);    
+    }]);
 })();
 (function () {
     'use strict';
@@ -325,7 +327,7 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
     "\n" +
     "    </div>\r" +
     "\n" +
-    "    <div class=\"actions\">\r" +
+    "    <div class=\"actions\" layout=\"row\">\r" +
     "\n" +
     "        <span class=\"action\" ng-repeat=\"action in options.actions\">\r" +
     "\n" +
