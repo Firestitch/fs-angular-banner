@@ -98,4 +98,5 @@ fs-banner .actions .material-icons {
 fs-banner .actions.fixed {
     position: fixed;
     bottom: 5px;
+    z-index: 99999;
 }
