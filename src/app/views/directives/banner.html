@@ -17,7 +17,7 @@
         <div ng-if="options.subheadline.template" fs-banner-bind-compile="options.subheadline.template" fs-banner-bind-compile-scope="options.subheadline.scope" class="subheadline"></div>
         <div class="subheadline" ng-if="!options.subheadline.template">{{options.subheadline}}</div>
     </div>
-    <div class="actions" layout="row">
+    <div class="actions" layout="row" layout-align="none center">
         <span class="action" ng-repeat="action in options.actions">
 
             <span ng-if="action.type=='template'" fs-banner-bind-compile="action.template" fs-banner-bind-compile-scope="action.scope"></span>
