@@ -105,3 +105,8 @@ fs-banner .actions.fixed {
     bottom: 5px;
     z-index: 99999;
 }
+
+fs-banner-content {
+    padding: 16px;
+    display: block;
+}
