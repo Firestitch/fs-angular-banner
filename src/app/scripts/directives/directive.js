@@ -98,8 +98,10 @@
 
                             form.append(button);
                             
-                            button[0].click();
-                            button.remove();
+                            $timeout(function() {
+                                button[0].click();
+                                button.remove();
+                            });
                         }
                     
                     } else if(action.type=='click') { 
