@@ -72,7 +72,7 @@
                     angular.element($window).off("scroll",scroll);
                 });
                 
-                if(!$scope.instance) {
+                if(!$scope.instance || angular.equals({}, $scope.instance)) {
                     $scope.instance = fsBanner.create($scope.options);
                 }
                 

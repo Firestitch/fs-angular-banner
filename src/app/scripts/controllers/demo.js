@@ -16,7 +16,7 @@
                                         }, { 'ngf-accept': 'image/*' })
                     .addActionTemplate(['<md-fab-speed-dial md-direction="left" class="md-fling" md-open="false">',
                             '<md-fab-trigger>',
-                                '<md-button aria-label="Add..." class="md-fab md-raised  md-primary">',
+                                '<md-button aria-label="Add..." class="md-fab md-mini">',
                                     '<md-icon>settings</md-icon>',
                                 '</md-button>',
                             '</md-fab-trigger>',
@@ -28,15 +28,17 @@
                                     '<md-icon>language</md-icon>',
                                 '</md-button>',
                             '</md-fab-actions>',
-                        '</md-fab-speed-dial>'].join(''),{ doit: function() { alert("doit"); }})
-                    .addAction('save',
+                        '</md-fab-speed-dial>'].join(''),
+                        { doit: function() { alert("doit"); }})
+                    .addClickAction('clear',
                             function() {
                                 alert('save()');
-                            })
+                            },
+                            { primary: false })
+                    .addSubmitAction('add','form')
                     .addSubmitAction('save','form');
 
     $scope.bannerOptions = banner.options();
-
     $scope.text = '';
     $scope.bannerInstance = {};
     $scope.submit = function() {

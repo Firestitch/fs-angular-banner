@@ -32,25 +32,25 @@
 
             this.addSubmitAction = function(icon, form, options) {
                 var options = options || {};
+                options.type = 'submit';
                 options.form = form;
-                this.addAction(icon, null, 'submit', options);
-                return this;
+                return this.addAction(icon, null, options);
             };
 
             this.addClickAction = function(icon, func, options) {
-                this.addAction(icon, func, 'click', options);
+                var options = options || {};
+                options.type = 'click';                
+                this.addAction(icon, func, options);
                 return this;
             };
 
             this.addActionTemplate = function(template, scope, options) {
                 var options = options || {};
-                var action = {  options: options,
-                                template: template,
-                                type: 'template',
-                                scope: scope };
-
-                this._options.actions.push(action);
-                return this;
+                options.scope = scope;
+                options.template = template;
+                options.type = 'template';
+                
+                return this.addAction('', '', options);
             };
 
             this.clearActions = function() {
@@ -63,12 +63,17 @@
                 return this;
             };
             
-            this.addAction = function(icon, func, type, options) {
+            this.addAction = function(icon, func, options) {
                 var options = options || {};
                 var action = {  func: func,
                                 icon: icon,
-                                options: options,
-                                type: type || 'click' };
+                                type: options.type || 'click',
+                                primary: options.primary!==false,
+                                options: options };
+
+                if(options.mini===undefined) {
+                    options.mini = !action.primary;
+                }
 
                 this._options.actions.push(action);
                 return this;

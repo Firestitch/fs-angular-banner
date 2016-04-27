@@ -1,3 +1,8 @@
+
+fs-banner {
+    margin-bottom: 25px;
+}
+
 fs-banner > div {
     position: relative;
     min-height: 90px;
@@ -93,6 +98,10 @@ fs-banner .actions .material-icons {
     line-height: 28px;
     width: 28px;
     height: 28px;
+}
+
+fs-banner .actions .md-button.md-fab:not(.md-accent) {
+  background-color: #727272;
 }
 
 fs-banner .actions.fixed {

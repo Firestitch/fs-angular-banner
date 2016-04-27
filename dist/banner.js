@@ -74,7 +74,7 @@
                     angular.element($window).off("scroll",scroll);
                 });
                 
-                if(!$scope.instance) {
+                if(!$scope.instance || angular.equals({}, $scope.instance)) {
                     $scope.instance = fsBanner.create($scope.options);
                 }
                 
@@ -161,130 +161,135 @@
     }]);
 })();
 (function () {
-    'use strict';
+    'use strict';
 
-    angular.module('fs-angular-banner')
-    .factory('fsBanner', function () {
- 
-        function Banner(options) {
-            this._options = options || {};
-            this._options.avatar = this._options.avatar || {};
-            this._options.actions = this._options.actions || [];
-            this._options.avatar.action = this._options.avatar.action || {};
-            this._options.styles = this._options.styles || '';
+    angular.module('fs-angular-banner')
+    .factory('fsBanner', function () {
+ 
+        function Banner(options) {
+            this._options = options || {};
+            this._options.avatar = this._options.avatar || {};
+            this._options.actions = this._options.actions || [];
+            this._options.avatar.action = this._options.avatar.action || {};
+            this._options.styles = this._options.styles || '';
 
-            this.avatarActionClick = function(icon, func) {
-                this._options.avatar.action.icon = icon;
-                this._options.avatar.action.click = func;
-                return this;
-            };
+            this.avatarActionClick = function(icon, func) {
+                this._options.avatar.action.icon = icon;
+                this._options.avatar.action.click = func;
+                return this;
+            };
 
-            this.background = function(background) {
-                this._options.styles = "background-image: url('" + background + "');";
-                return this;
-            };
+            this.background = function(background) {
+                this._options.styles = "background-image: url('" + background + "');";
+                return this;
+            };
 
-            this.avatarActionUpload = function(icon, func, options) {
-                options = options || {};
-                options.select = func;
-                this._options.avatar.action.icon = icon;
-                this._options.avatar.action.upload = options;
-                return this;
-            };
+            this.avatarActionUpload = function(icon, func, options) {
+                options = options || {};
+                options.select = func;
+                this._options.avatar.action.icon = icon;
+                this._options.avatar.action.upload = options;
+                return this;
+            };
 
-            this.addSubmitAction = function(icon, form, options) {
-                var options = options || {};
-                options.form = form;
-                this.addAction(icon, null, 'submit', options);
-                return this;
-            };
+            this.addSubmitAction = function(icon, form, options) {
+                var options = options || {};
+                options.type = 'submit';
+                options.form = form;
+                return this.addAction(icon, null, options);
+            };
 
-            this.addClickAction = function(icon, func, options) {
-                this.addAction(icon, func, 'click', options);
-                return this;
-            };
+            this.addClickAction = function(icon, func, options) {
+                var options = options || {};
+                options.type = 'click';                
+                this.addAction(icon, func, options);
+                return this;
+            };
 
-            this.addActionTemplate = function(template, scope, options) {
-                var options = options || {};
-                var action = {  options: options,
-                                template: template,
-                                type: 'template',
-                                scope: scope };
+            this.addActionTemplate = function(template, scope, options) {
+                var options = options || {};
+                options.scope = scope;
+                options.template = template;
+                options.type = 'template';
+                
+                return this.addAction('', '', options);
+            };
 
-                this._options.actions.push(action);
-                return this;
-            };
+            this.clearActions = function() {
+                this._options.actions = [];
+                return this;
+            };
 
-            this.clearActions = function() {
-                this._options.actions = [];
-                return this;
-            };
+            this.clearAvatarAction = function() {
+                this._options.avatar.action = {};
+                return this;
+            };
+            
+            this.addAction = function(icon, func, options) {
+                var options = options || {};
+                var action = {  func: func,
+                                icon: icon,
+                                type: options.type || 'click',
+                                primary: options.primary!==false,
+                                options: options };
 
-            this.clearAvatarAction = function() {
-                this._options.avatar.action = {};
-                return this;
-            };
-            
-            this.addAction = function(icon, func, type, options) {
-                var options = options || {};
-                var action = {  func: func,
-                                icon: icon,
-                                options: options,
-                                type: type || 'click' };
+                if(options.mini===undefined) {
+                    options.mini = !action.primary;
+                }
 
-                this._options.actions.push(action);
-                return this;
-            };
+                this._options.actions.push(action);
+                return this;
+            };
 
-            this.headline = function(headline) {
-                this._options.headline = headline;
-                return this;
-            };
+            this.headline = function(headline) {
+                this._options.headline = headline;
+                return this;
+            };
 
-            this.headlineTemplate = function(template, scope) {
-                this._options.headline = { template: template, scope: scope };
-                return this;
-            };
+            this.headlineTemplate = function(template, scope) {
+                this._options.headline = { template: template, scope: scope };
+                return this;
+            };
 
-            this.subheadline = function(subheadline) {
-                this._options.subheadline = subheadline;
-                return this;
-            };
+            this.subheadline = function(subheadline) {
+                this._options.subheadline = subheadline;
+                return this;
+            };
 
-            this.subheadlineTemplate = function(template, scope) {
-                this._options.subheadline = { template: template, scope: scope };
-                return this;
-            };
+            this.subheadlineTemplate = function(template, scope) {
+                this._options.subheadline = { template: template, scope: scope };
+                return this;
+            };
 
-            this.avatarImage = function(image) {
-                this._options.avatar.image = image;
-                return this;
-            };
+            this.avatarImage = function(image) {
+                this._options.avatar.image = image;
+                return this;
+            };
 
-            this.avatarIcon = function(icon) {
-                this._options.avatar.icon = icon;
-                return this;
-            };
+            this.avatarIcon = function(icon) {
+                this._options.avatar.icon = icon;
+                return this;
+            };
 
-            this.options = function() {
-                return this._options;
-            };
+            this.options = function() {
+                return this._options;
+            };
 
-            return this;
-        }
+            return this;
+        }
 
-        var service = {
-            create: create
-        };
-       
-        return service;
+        var service = {
+            create: create
+        };
+       
+        return service;
 
-        function create(options) {
-            return new Banner(options); 
-        }
+        function create(options) {
+            return new Banner(options); 
+        }
 
-    });
-})();
+    });
+})();
 angular.module('fs-angular-banner').run(['$templateCache', function($templateCache) {
   'use strict';
 
@@ -327,17 +332,15 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
     "\n" +
     "    </div>\r" +
     "\n" +
-    "    <div class=\"actions\" layout=\"row\" layout-align=\"none center\">\r" +
+    "    <div class=\"actions\" layout=\"row\"   layout-align=\"end center\">\r" +
     "\n" +
     "        <span class=\"action\" ng-repeat=\"action in options.actions\">\r" +
     "\n" +
-    "\r" +
+    "            <span ng-if=\"action.type=='template'\" fs-banner-bind-compile=\"action.options.template\" fs-banner-bind-compile-scope=\"action.options.scope\"></span>\r" +
     "\n" +
-    "            <span ng-if=\"action.type=='template'\" fs-banner-bind-compile=\"action.template\" fs-banner-bind-compile-scope=\"action.scope\"></span>\r" +
+    "            <span ng-if=\"action.type=='submit' || action.type=='click'\">            \r" +
     "\n" +
-    "            <span ng-if=\"action.type=='submit' || action.type=='click'\">\r" +
-    "\n" +
-    "                <md-button class=\"md-fab md-accent\" aria-label=\"Save\" type=\"{{actionType(action)}}\" ng-click=\"actionClick(action, $event)\">\r" +
+    "                <md-button class=\"md-fab\" ng-class=\"{ 'md-accent': action.primary, 'md-mini': action.options.mini }\" aria-label=\"Save\" type=\"{{actionType(action)}}\" ng-click=\"actionClick(action, $event)\">\r" +
     "\n" +
     "                    <md-icon md-icon-set=\"material-icons\">{{action.icon}}</md-icon>\r" +
     "\n" +
