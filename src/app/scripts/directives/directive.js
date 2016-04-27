@@ -150,7 +150,8 @@
                         
                         var scope = $scope.$eval(attrs.fsBannerBindCompileScope);
                         if(scope) {
-                            compileScope = scope.constructor.name=='Scope' ? scope : angular.extend($scope,scope);
+                            //If this is already a scope variable use it other wise extend the current scope
+                            compileScope = scope.$id ? scope : angular.extend($scope,scope);
                         }
                     }
 
