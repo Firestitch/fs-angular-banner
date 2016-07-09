@@ -3,8 +3,7 @@
 
     /**
      * @ngdoc directive
-     * @name fs-angular-banner.directives:banner
-     * @description
+     * @name app.service:fs-banner
      * @restrict E
      * @param {object} bn-options Options to configure the banner.
      * <table class="variables-matrix table table-bordered table-striped"><thead><tr><th>Option</th><th>Type</th><th>Details</th></tr></thead><tbody>
