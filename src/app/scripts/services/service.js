@@ -10,6 +10,7 @@
             this._options.actions = this._options.actions || [];
             this._options.avatar.action = this._options.avatar.action || {};
             this._options.styles = this._options.styles || '';
+            this._options.superheadline = this._options.superheadline || {};
 
             this.avatarActionClick = function(icon, func) {
                 this._options.avatar.action.icon = icon;
@@ -86,6 +87,21 @@
 
             this.headlineTemplate = function(template, scope) {
                 this._options.headline = { template: template, scope: scope };
+                return this;
+            };
+
+            this.superheadline = function(superheadline) {
+
+                if(angular.isObject(superheadline)) {
+                    this._options.superheadline = superheadline;
+                } else {
+                    this._options.superheadline.template = superheadline;
+                }                
+                return this;
+            };
+
+            this.superheadlineTemplate = function(template, scope) {
+                this._options.superheadline = { template: template, scope: scope };
                 return this;
             };
 

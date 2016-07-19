@@ -78,11 +78,17 @@ fs-banner .headline {
     margin: 0 0 2px 0;
 }
 
+fs-banner .superheadline {
+    color: #333;
+    font-size: 14px;
+}
+
 fs-banner .subheadline {
     color: #333;
     margin: 0;
-    font-size: 18px;
+    font-size: 17px;
 }
+
 fs-banner .actions {
     position: absolute;
     right: 8px;

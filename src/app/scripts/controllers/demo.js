@@ -6,7 +6,8 @@
 
   	var banner = fsBanner.create()
                     .background('http://tri-niche.com/wp-content/uploads/2015/01/Gradient-1.jpg')
-                    .headlineTemplate('Headline<hr>')
+                    .superheadline({ template: '<a href ng-click="alert()">Superheadline</a>', scope: { alert: function() { alert('!!!!!'); }} })
+                    .headlineTemplate('Headline')
                    	.avatarIcon('person')
                     .subheadline('Subheadline')
                     .avatarImage('https://images.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png')
@@ -39,6 +40,7 @@
                     .addSubmitAction('save','form');
 
     $scope.bannerOptions = banner.options();
+
     $scope.text = '';
     $scope.bannerInstance = {};
     $scope.submit = function() {

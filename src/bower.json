@@ -1,6 +1,7 @@
 {
   "name": "fs-angular-banner",
   "namespace": "banner",
+  "port": "5014",    
   "moduleName": "app",
   "version": "0.0.0",
   "appPath": "app",
