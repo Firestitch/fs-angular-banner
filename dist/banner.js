@@ -1,3 +1,4 @@
+(function () { angular.module('fs-angular-banner',[]); })();
 
 (function () {
     'use strict';
