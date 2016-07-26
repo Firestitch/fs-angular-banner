@@ -1,4 +1,3 @@
-(function () { angular.module('fs-angular-banner',[]); })();
 
 (function () {
     'use strict';
@@ -96,7 +95,7 @@
     *</pre>
     */
 
-    var banner = function ($compile, fsBanner, $timeout, $window) {
+    var banner = ['$compile','fsBanner','$timeout','$window',function ($compile, fsBanner, $timeout, $window) {
         return {
  templateUrl: 'views/directives/banner.html',
  restrict: 'E',
@@ -182,9 +181,9 @@
      });     
  }
         };
-    }
+    }];
 
-    angular.module('fs-angular-banner')
+    angular.module('fs-angular-banner',[])
     .directive('banner',banner)
     .directive('fsBanner',banner)
     .directive('fsBannerBindCompile', ['$compile', function ($compile) {
