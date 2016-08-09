@@ -3,7 +3,7 @@
 
     /**
       * @ngdoc directive
-      * @name fs.fs-banner
+      * @name fs.directives:fs-banner
       * @restrict E
       * @param {object} fs-options Options to configure the banner.
       * @param {object} fs-options.avatar Configures paging
