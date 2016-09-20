@@ -36,8 +36,8 @@
                                 alert('save()');
                             },
                             { primary: false })
-                    .addSubmitAction('add','form')
-                    .addSubmitAction('save','form');
+                    .addSubmitAction('add','form',{ tooltip: 'Add' })
+                    .addSubmitAction('save','form',{ tooltip: 'Add' });
 
     $scope.bannerOptions = banner.options();
 

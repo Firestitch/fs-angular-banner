@@ -18,13 +18,14 @@
         <div ng-if="options.subheadline.template" fs-banner-bind-compile="options.subheadline.template" fs-banner-bind-compile-scope="options.subheadline.scope" class="subheadline"></div>
         <div class="subheadline" ng-if="!options.subheadline.template">{{options.subheadline}}</div>
     </div>
-    <div class="actions" layout="row"   layout-align="end center">
+    <div class="actions" layout="row" layout-align="end center">
         <span class="action" ng-repeat="action in options.actions">
             <span ng-if="action.type=='template'" fs-banner-bind-compile="action.options.template" fs-banner-bind-compile-scope="action.options.scope"></span>
-            <span ng-if="action.type=='submit' || action.type=='click'">            
+            <span ng-if="action.type=='submit' || action.type=='click'">
                 <md-button class="md-fab" ng-class="{ 'md-accent': action.primary, 'md-mini': action.options.mini }" aria-label="Save" type="{{actionType(action)}}" ng-click="actionClick(action, $event)">
                     <md-icon md-icon-set="material-icons">{{action.icon}}</md-icon>
                 </md-button>
+                <md-tooltip md-delay="750" ng-if="action.options.tooltip">{{action.options.tooltip}}</md-tooltip>
             </span>
         </span>
     </div>

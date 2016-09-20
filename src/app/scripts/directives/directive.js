@@ -24,17 +24,17 @@
        <ul>
            <li><label>template</label>The content of the super headline</li>
            <li><label>scope</label>Scope used to render the super headline</li>
-       </ul>    
+       </ul>
       * @param {object} fs-options.headline The headline of the banner
        <ul>
            <li><label>template</label>The content of the headline</li>
            <li><label>scope</label>Scope used to render the headline</li>
-       </ul>     
+       </ul>
       * @param {object} fs-options.subheadline The sub headline of the banner
        <ul>
            <li><label>template</label>The content of the sub headline</li>
            <li><label>scope</label>Scope used to render the sub headline</li>
-       </ul>     
+       </ul>
       * @param {string} fs-options.background Backgrond image of the banner
       * @param {array} fs-options.actions This configures icons located on the far right side of the banner.</li>
        <ul>
@@ -48,8 +48,9 @@
            <li><label>click</label> This click callback function</li>
            <li><label>mini</label> Makes the button mini in size</li>
            <li><label>scope</label> Scope which is used for type=template</li>
+           <li><label>tooltip</label> Tooltip used for the button</li>
        </ul>
-      * @param {object} fs-options.styles This ng-style object is used child div fs-banner</li>    
+      * @param {object} fs-options.styles This ng-style object is used child div fs-banner</li>
       * @example
       * <pre>
       *var banner = fsBanner.create()
