@@ -507,19 +507,9 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
   $templateCache.put('views/directives/banner.html',
     "<div layout=\"row\" layout-align=\"start center\" style=\"{{ options.styles }}\">\r" +
     "\n" +
-    "    <div class=\"avatar\" ng-class=\"{ clickable: options.avatar.click }\" ng-click=\"click(options.avatar.click, $event)\">\r" +
+    "    <div class=\"avatar\" ng-class=\"{ clickable: options.avatar.click || options.avatar.action.upload }\" ng-click=\"click(options.avatar.click, $event)\" ngf-select=\"upload($files)\" ng-disabled=\"!options.avatar.action.upload\">\r" +
     "\n" +
-    "        <md-button ng-show=\"options.avatar.action.icon && options.avatar.action.upload\" class=\"md-fab action-icon\" ngf-select=\"upload($files)\">\r" +
-    "\n" +
-    "            <md-icon>{{options.avatar.action.icon}}</md-icon>\r" +
-    "\n" +
-    "        </md-button>\r" +
-    "\n" +
-    "        <md-button ng-show=\"options.avatar.action.icon && !options.avatar.action.upload\" class=\"md-fab action-icon\">\r" +
-    "\n" +
-    "            <md-icon>{{options.avatar.action.icon}}</md-icon>\r" +
-    "\n" +
-    "        </md-button>\r" +
+    "        <div class=\"hover\" ng-show=\"options.avatar.click || options.avatar.action.upload\">change</div>\r" +
     "\n" +
     "        <div class=\"icon\" ng-if=\"options.avatar.image\" style=\"background-image: url('{{options.avatar.image}}')\"></div>\r" +
     "\n" +

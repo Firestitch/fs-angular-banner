@@ -3,6 +3,10 @@ fs-banner {
     margin-bottom: 25px;
 }
 
+fs-banner * {
+    outline: none;
+}
+
 fs-banner > div {
     position: relative;
     min-height: 90px;
@@ -11,6 +15,27 @@ fs-banner > div {
 
 fs-banner .avatar {
     position: relative;
+    margin-right: 20px;
+}
+
+fs-banner .avatar .hover {
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.3);
+    border-radius: 50%;
+    clip: rect(37px,65px,65px,0);
+    font-size: 13px;
+    padding-top: 40px;
+    text-align: center;
+    color: #efefef;
+}
+
+fs-banner .avatar:hover .hover {
+    display: block;
 }
 
 fs-banner .avatar.clickable {
@@ -41,7 +66,6 @@ fs-banner .avatar .icon {
     border-radius: 50%;
     overflow: hidden;
     border: 1 solid  #efefef;
-    margin: 15px 15px 15px 0;
     text-align: center;
     background-position: 50% 50%;
     background-size: contain;
@@ -92,7 +116,7 @@ fs-banner .subheadline {
 fs-banner .actions {
     position: absolute;
     right: 8px;
-    bottom: -28px;  
+    bottom: -28px;
 }
 
 fs-banner .actions .action {
