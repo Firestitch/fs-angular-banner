@@ -20,7 +20,7 @@
                 <md-button class="md-fab" ng-class="{ 'md-accent': action.primary, 'md-mini': action.options.mini }" aria-label="Save" type="{{actionType(action)}}" ng-click="actionClick(action, $event)">
                     <md-icon md-icon-set="material-icons">{{action.icon}}</md-icon>
                 </md-button>
-                <md-tooltip md-delay="750" ng-if="action.options.tooltip">{{action.options.tooltip}}</md-tooltip>
+                <md-tooltip md-delay="750" md-direction="{{action.options.tooltipDirection ? action.options.tooltipDirection : 'bottom'}}" ng-if="action.options.tooltip">{{action.options.tooltip}}</md-tooltip>
             </span>
         </span>
     </div>

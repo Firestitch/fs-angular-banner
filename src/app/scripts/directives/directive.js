@@ -49,6 +49,7 @@
            <li><label>mini</label> Makes the button mini in size</li>
            <li><label>scope</label> Scope which is used for type=template</li>
            <li><label>tooltip</label> Tooltip used for the button</li>
+           <li><label>tooltipDirection</label>Which direction would you like the tooltip to go? Supports left, right, top, and bottom. Defaults to bottom.</li>
        </ul>
       * @param {object} fs-options.styles This ng-style object is used child div fs-banner</li>
       * @example
