@@ -506,32 +506,58 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
   'use strict';
 
   $templateCache.put('views/directives/banner.html',
-    "<div layout=\"row\" layout-align=\"start center\" style=\"{{ options.styles }}\">\n" +
-    "    <div class=\"avatar\" ng-class=\"{ clickable: options.avatar.click || options.avatar.action.upload }\" ng-click=\"click(options.avatar.click, $event)\" ngf-select=\"upload($files)\" ng-disabled=\"!options.avatar.action.upload\">\n" +
-    "        <div class=\"hover\" ng-show=\"options.avatar.click || options.avatar.action.upload\">change</div>\n" +
-    "        <div class=\"icon\" ng-if=\"options.avatar.image\" style=\"background-image: url('{{options.avatar.image}}')\"></div>\n" +
-    "        <div class=\"icon\" ng-show=\"!options.avatar.image\">\n" +
-    "            <md-icon>{{options.avatar.icon}}</md-icon>\n" +
-    "        </div>\n" +
-    "    </div>\n" +
-    "    <div flex>\n" +
-    "        <div ng-if=\"options.superheadline.template\" fs-banner-bind-compile=\"options.superheadline.template\" fs-banner-bind-compile-scope=\"options.superheadline.scope\" class=\"superheadline\"></div>\n" +
-    "        <div class=\"headline\" ng-if=\"options.headline.template\" fs-banner-bind-compile=\"options.headline.template\" fs-banner-bind-compile-scope=\"options.headline.scope\"></div>\n" +
-    "        <div class=\"headline\" ng-if=\"!options.headline.template\">{{options.headline}}</div>\n" +
-    "        <div ng-if=\"options.subheadline.template\" fs-banner-bind-compile=\"options.subheadline.template\" fs-banner-bind-compile-scope=\"options.subheadline.scope\" class=\"subheadline\"></div>\n" +
-    "        <div class=\"subheadline\" ng-if=\"!options.subheadline.template\">{{options.subheadline}}</div>\n" +
-    "    </div>\n" +
-    "    <div class=\"actions\" layout=\"row\" layout-align=\"end center\">\n" +
-    "        <span class=\"action\" ng-repeat=\"action in options.actions\">\n" +
-    "            <span ng-if=\"action.type=='template'\" fs-banner-bind-compile=\"action.options.template\" fs-banner-bind-compile-scope=\"action.options.scope\"></span>\n" +
-    "            <span ng-if=\"action.type=='submit' || action.type=='click'\">\n" +
-    "                <md-button class=\"md-fab\" ng-class=\"{ 'md-accent': action.primary, 'md-mini': action.options.mini }\" aria-label=\"Save\" type=\"{{actionType(action)}}\" ng-click=\"actionClick(action, $event)\">\n" +
-    "                    <md-icon md-icon-set=\"material-icons\">{{action.icon}}</md-icon>\n" +
-    "                </md-button>\n" +
-    "                <md-tooltip md-delay=\"750\" md-direction=\"{{action.options.tooltipDirection ? action.options.tooltipDirection : 'bottom'}}\" ng-if=\"action.options.tooltip\">{{action.options.tooltip}}</md-tooltip>\n" +
-    "            </span>\n" +
-    "        </span>\n" +
-    "    </div>\n" +
+    "<div layout=\"row\" layout-align=\"start center\" style=\"{{ options.styles }}\">\r" +
+    "\n" +
+    "    <div class=\"avatar\" ng-class=\"{ clickable: options.avatar.click || options.avatar.action.upload }\" ng-click=\"click(options.avatar.click, $event)\" ngf-select=\"upload($files)\" ng-disabled=\"!options.avatar.action.upload\">\r" +
+    "\n" +
+    "        <div class=\"hover\" ng-show=\"options.avatar.click || options.avatar.action.upload\">change</div>\r" +
+    "\n" +
+    "        <div class=\"icon\" ng-if=\"options.avatar.image\" style=\"background-image: url('{{options.avatar.image}}')\"></div>\r" +
+    "\n" +
+    "        <div class=\"icon\" ng-show=\"!options.avatar.image\">\r" +
+    "\n" +
+    "            <md-icon>{{options.avatar.icon}}</md-icon>\r" +
+    "\n" +
+    "        </div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div flex>\r" +
+    "\n" +
+    "        <div ng-if=\"options.superheadline.template\" fs-banner-bind-compile=\"options.superheadline.template\" fs-banner-bind-compile-scope=\"options.superheadline.scope\" class=\"superheadline\"></div>\r" +
+    "\n" +
+    "        <div class=\"headline\" ng-if=\"options.headline.template\" fs-banner-bind-compile=\"options.headline.template\" fs-banner-bind-compile-scope=\"options.headline.scope\"></div>\r" +
+    "\n" +
+    "        <div class=\"headline\" ng-if=\"!options.headline.template\">{{options.headline}}</div>\r" +
+    "\n" +
+    "        <div ng-if=\"options.subheadline.template\" fs-banner-bind-compile=\"options.subheadline.template\" fs-banner-bind-compile-scope=\"options.subheadline.scope\" class=\"subheadline\"></div>\r" +
+    "\n" +
+    "        <div class=\"subheadline\" ng-if=\"!options.subheadline.template\">{{options.subheadline}}</div>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
+    "    <div class=\"actions\" layout=\"row\" layout-align=\"end center\">\r" +
+    "\n" +
+    "        <span class=\"action\" ng-repeat=\"action in options.actions\">\r" +
+    "\n" +
+    "            <span ng-if=\"action.type=='template'\" fs-banner-bind-compile=\"action.options.template\" fs-banner-bind-compile-scope=\"action.options.scope\"></span>\r" +
+    "\n" +
+    "            <span ng-if=\"action.type=='submit' || action.type=='click'\">\r" +
+    "\n" +
+    "                <md-button class=\"md-fab\" ng-class=\"{ 'md-accent': action.primary, 'md-mini': action.options.mini }\" aria-label=\"Save\" type=\"{{actionType(action)}}\" ng-click=\"actionClick(action, $event)\">\r" +
+    "\n" +
+    "                    <md-icon md-icon-set=\"material-icons\">{{action.icon}}</md-icon>\r" +
+    "\n" +
+    "                </md-button>\r" +
+    "\n" +
+    "                <md-tooltip md-delay=\"750\" md-direction=\"{{action.options.tooltipDirection ? action.options.tooltipDirection : 'bottom'}}\" ng-if=\"action.options.tooltip\">{{action.options.tooltip}}</md-tooltip>\r" +
+    "\n" +
+    "            </span>\r" +
+    "\n" +
+    "        </span>\r" +
+    "\n" +
+    "    </div>\r" +
+    "\n" +
     "</div>"
   );
 
