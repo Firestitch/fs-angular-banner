@@ -19,7 +19,6 @@ fs-banner .avatar {
 }
 
 fs-banner .avatar .hover {
-    display: none;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -32,10 +31,6 @@ fs-banner .avatar .hover {
     padding-top: 40px;
     text-align: center;
     color: #efefef;
-}
-
-fs-banner .avatar:hover .hover {
-    display: block;
 }
 
 fs-banner .avatar.clickable {
