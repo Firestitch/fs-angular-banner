@@ -60,7 +60,6 @@ fs-banner .avatar .icon {
     background-color: #DDD;
     border-radius: 50%;
     overflow: hidden;
-    border: 1 solid  #efefef;
     text-align: center;
     background-position: 50% 50%;
     background-size: contain;
@@ -71,9 +70,10 @@ fs-banner .avatar .icon > .material-icons {
     font-size: 55px;
     display: inline-block;
     color: #334;
-    line-height: 75px;
+    line-height: 65px;
+    line-height: inherit;
     vertical-align: middle;
-    width: 75px;
+    width: 100%;
 }
 
 fs-banner .avatar .action-icon {
