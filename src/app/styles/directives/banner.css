@@ -24,9 +24,10 @@ fs-banner .avatar .hover {
     border-radius: 50%;
     clip: rect(37px,65px,65px,0);
     font-size: 12px;
-    padding-top: 40px;
+    padding-top: 43px;
     text-align: center;
     color: #fff;
+    z-index: 9;
 }
 
 fs-banner .avatar.clickable {
@@ -53,6 +54,7 @@ fs-banner .avatar .icon {
     border-width: 1px;
     height: 65px;
     width: 65px;
+    line-height: 65px;
     background-color: #DDD;
     border-radius: 50%;
     overflow: hidden;
@@ -63,13 +65,10 @@ fs-banner .avatar .icon {
 }
 
 fs-banner .avatar .icon > .material-icons {
-    font-size: 55px;
     display: inline-block;
     color: #334;
-    line-height: 65px;
-    line-height: inherit;
-    vertical-align: middle;
-    width: 100%;
+    line-height: 95%;
+    transform: scale(2.5);
 }
 
 fs-banner .avatar .action-icon {
