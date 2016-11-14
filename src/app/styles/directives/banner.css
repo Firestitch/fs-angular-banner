@@ -7,7 +7,7 @@ fs-banner * {
     outline: none;
 }
 
-fs-banner > div {
+fs-banner .fs-banner {
     position: relative;
     min-height: 90px;
     padding-left: 15px;
@@ -24,13 +24,13 @@ fs-banner .avatar .hover {
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0,0,0,.3);
+    background: rgba(0,0,0,.15);
     border-radius: 50%;
     clip: rect(37px,65px,65px,0);
-    font-size: 13px;
+    font-size: 12px;
     padding-top: 40px;
     text-align: center;
-    color: #efefef;
+    color: #fff;
 }
 
 fs-banner .avatar.clickable {
@@ -92,18 +92,18 @@ fs-banner .avatar .action-icon .material-icons {
 }
 
 fs-banner .headline {
-    color: #111;
+    color: #fff;
     font-size: 23px;
     margin: 0 0 2px 0;
 }
 
 fs-banner .superheadline {
-    color: #333;
+    color: #fff;
     font-size: 14px;
 }
 
 fs-banner .subheadline {
-    color: #333;
+    color: #fff;
     margin: 0;
     font-size: 17px;
 }

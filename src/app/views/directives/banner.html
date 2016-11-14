@@ -1,4 +1,5 @@
-<div layout="row" layout-align="start center" style="{{ options.styles }}">
+<div layout="row" layout-align="start center" ng-style="options.styles" md-colors="::{backgroundColor: 'primary-hue-1'}" class="fs-banner">
+
     <div class="avatar" ng-class="{ clickable: options.avatar.click || options.avatar.action.upload }" ng-click="click(options.avatar.click, $event)" ngf-select="upload($files)" ng-disabled="!options.avatar.action.upload">
         <div class="hover" ng-show="options.avatar.click || options.avatar.action.upload">change</div>
         <div class="icon" ng-if="options.avatar.image" style="background-image: url('{{options.avatar.image}}')"></div>
