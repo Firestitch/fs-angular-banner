@@ -1,9 +1,9 @@
 <div layout="row" layout-align="start center" ng-style="options.styles" md-colors="::{backgroundColor: 'primary'}" class="fs-banner">
 
-    <div class="avatar" ng-class="{ clickable: options.avatar.click || options.avatar.action.upload }" ng-click="click(options.avatar.click, $event)" ngf-select="upload($files)" ng-disabled="!options.avatar.action.upload">
+    <div class="avatar" ng-class="{ clickable: options.avatar.click || options.avatar.action.upload }" ng-click="click(options.avatar.click, $event)" ngf-select="upload($files)" ngf-resize="{ width: 800, height: 800, quality: .8 }" ng-disabled="!options.avatar.action.upload">
         <div class="hover" ng-show="options.avatar.click || options.avatar.action.upload">change</div>
-        <div class="icon" ng-if="options.avatar.image" style="background-image: url('{{options.avatar.image}}')"></div>
-        <div class="icon" ng-show="!options.avatar.image">
+        <div class="icon ng-hide" ng-show="options.avatar.image" style="background-image: url('{{options.avatar.image}}')"></div>
+        <div class="icon ng-hide" ng-show="!options.avatar.image">
             <md-icon>{{options.avatar.icon}}</md-icon>
         </div>
     </div>

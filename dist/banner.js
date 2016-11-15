@@ -510,13 +510,13 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
     "\n" +
     "\r" +
     "\n" +
-    "    <div class=\"avatar\" ng-class=\"{ clickable: options.avatar.click || options.avatar.action.upload }\" ng-click=\"click(options.avatar.click, $event)\" ngf-select=\"upload($files)\" ng-disabled=\"!options.avatar.action.upload\">\r" +
+    "    <div class=\"avatar\" ng-class=\"{ clickable: options.avatar.click || options.avatar.action.upload }\" ng-click=\"click(options.avatar.click, $event)\" ngf-select=\"upload($files)\" ngf-resize=\"{ width: 800, height: 800, quality: .8 }\" ng-disabled=\"!options.avatar.action.upload\">\r" +
     "\n" +
     "        <div class=\"hover\" ng-show=\"options.avatar.click || options.avatar.action.upload\">change</div>\r" +
     "\n" +
-    "        <div class=\"icon\" ng-if=\"options.avatar.image\" style=\"background-image: url('{{options.avatar.image}}')\"></div>\r" +
+    "        <div class=\"icon ng-hide\" ng-show=\"options.avatar.image\" style=\"background-image: url('{{options.avatar.image}}')\"></div>\r" +
     "\n" +
-    "        <div class=\"icon\" ng-show=\"!options.avatar.image\">\r" +
+    "        <div class=\"icon ng-hide\" ng-show=\"!options.avatar.image\">\r" +
     "\n" +
     "            <md-icon>{{options.avatar.icon}}</md-icon>\r" +
     "\n" +

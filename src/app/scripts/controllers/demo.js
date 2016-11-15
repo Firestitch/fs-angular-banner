@@ -10,7 +10,7 @@
                     .headlineTemplate('Headline')
                    	.avatarIcon('person')
                     .subheadline('Subheadline')
-                    //.avatarImage('https://images.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png')
+                    .avatarImage('https://images.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png')
                     .avatarActionUpload('photo_camera',
                                                 function(file) {
                                             $scope.bannerInstance.avatarImage('http://product-images.imshopping.com/nimblebuy/forest-glen-golf-centre-968482-1484562-regular.jpg');
