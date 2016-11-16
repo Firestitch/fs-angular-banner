@@ -68,7 +68,7 @@ fs-banner .avatar .icon > .material-icons {
     display: inline-block;
     color: #334;
     line-height: 95%;
-    transform: scale(2.5);
+    transform: scale(1.5);
 }
 
 fs-banner .avatar .action-icon {
