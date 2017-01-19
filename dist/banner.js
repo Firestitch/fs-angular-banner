@@ -514,7 +514,7 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
     "\n" +
     "        <div class=\"hover\" ng-show=\"options.avatar.click || options.avatar.action.upload\">change</div>\r" +
     "\n" +
-    "        <div class=\"icon ng-hide\" ng-show=\"options.avatar.image\" style=\"background-image: url('{{options.avatar.image}}')\"></div>\r" +
+    "        <div class=\"icon\" ng-if=\"options.avatar.image\" style=\"background-image: url('{{options.avatar.image}}')\"></div>\r" +
     "\n" +
     "        <div class=\"icon ng-hide\" ng-show=\"!options.avatar.image\">\r" +
     "\n" +
