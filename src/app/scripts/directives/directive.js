@@ -117,7 +117,9 @@
                 });
 
                 $scope.upload = function(file) {
-                    $scope.options.avatar.action.upload.select(file);
+                    if(file) {
+                      $scope.options.avatar.action.upload.select(file);
+                    }
                 }
 
                 $scope.actionClick = function(action, $event) {
