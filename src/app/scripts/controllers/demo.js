@@ -4,7 +4,7 @@
 angular.module('app')
   .controller('DemoCtrl', function ($scope, fsBanner) {
 
-  	var banner = fsBanner.create()
+  	$scope.bannerOptions = fsBanner.create()
                     //.background('http://tri-niche.com/wp-content/uploads/2015/01/Gradient-1.jpg')
                     .superheadline({ template: '<a href ng-click="alert()">Superheadline</a>', scope: { alert: function() { alert('!!!!!'); }} })
                     .headlineTemplate('Headline')
@@ -38,8 +38,6 @@
                             { primary: false })
                     .addSubmitAction('add','form',{ tooltip: 'Add' })
                     .addSubmitAction('save','form',{ tooltip: 'Add' });
-
-    $scope.bannerOptions = banner.options();
 
     $scope.text = '';
     $scope.bannerInstance = {};

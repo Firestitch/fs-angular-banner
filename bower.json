@@ -5,6 +5,9 @@
     "dist/banner.js",
     "dist/banner.css"
   ],
+  "dependencies": {
+    "fs-angular-util": "^1.0.0"
+  },
   "authors": [
     "Firestitch Inc."
   ],

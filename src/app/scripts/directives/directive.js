@@ -96,7 +96,7 @@
       *</pre>
       */
 
-    var banner = ['$compile', 'fsBanner', '$timeout', '$window', function($compile, fsBanner, $timeout, $window) {
+    var banner = ['$compile', 'fsBanner', '$timeout', '$window', 'fsUtil', function($compile, fsBanner, $timeout, $window, fsUtil) {
         return {
             templateUrl: 'views/directives/banner.html',
             restrict: 'E',
@@ -108,7 +108,10 @@
             },
             controller: ['$scope',function($scope) {
 
-                if (!$scope.instance || angular.equals({}, $scope.instance)) {
+                if(fsUtil.isClass($scope.options,'Banner')) {
+                  $scope.instance = $scope.options;
+
+                } else if (!$scope.instance || angular.equals({}, $scope.instance)) {
                     $scope.instance = fsBanner.create($scope.options);
                 }
 
@@ -186,7 +189,7 @@
         };
     }];
 
-    angular.module('fs-angular-banner', [])
+    angular.module('fs-angular-banner', ['fs-angular-util'])
         .directive('banner', banner)
         .directive('fsBanner', banner)
         .directive('fsBannerBindCompile', ['$compile', function($compile) {
