@@ -511,7 +511,7 @@ angular.module('fs-angular-banner').run(['$templateCache', function($templateCac
   'use strict';
 
   $templateCache.put('views/directives/banner.html',
-    "<div layout=\"row\" layout-align=\"start center\" ng-style=\"options.styles\" md-colors=\"::{backgroundColor: 'primary'}\" class=\"fs-banner\">\r" +
+    "<div layout=\"row\" layout-align=\"start center\" ng-style=\"options.styles\" class=\"fs-banner fs-theme-primary-background-color\">\r" +
     "\n" +
     "\r" +
     "\n" +
