@@ -1,18 +1,19 @@
-<div layout="row" layout-align="start center" ng-style="options.styles" class="fs-banner fs-theme-primary-background-color">
-
-    <div class="avatar" ng-if="options.avatar.icon || options.avatar.image" ng-class="{ clickable: options.avatar.click || options.avatar.action.upload }" ng-click="click(options.avatar.click, $event)" ngf-select="upload($file)" ngf-resize="{ width: 800, height: 800, quality: .8 }" ng-disabled="!options.avatar.action.upload">
-        <div class="hover" ng-show="options.avatar.click || options.avatar.action.upload">change</div>
-        <div class="icon" ng-if="options.avatar.image" style="background-image: url('{{options.avatar.image}}')"></div>
-        <div class="icon ng-hide" ng-show="!options.avatar.image">
-            <md-icon>{{options.avatar.icon}}</md-icon>
+<div ng-style="options.styles" class="fs-banner">
+    <div class="wrap" layout="row" layout-align="start center">
+        <div class="avatar" ng-if="options.avatar.icon || options.avatar.image" ng-class="{ clickable: options.avatar.click || options.avatar.action.upload }" ng-click="click(options.avatar.click, $event)" ngf-select="upload($file)" ngf-resize="{ width: 800, height: 800, quality: .8 }" ng-disabled="!options.avatar.action.upload">
+            <div class="hover" ng-show="options.avatar.click || options.avatar.action.upload">change</div>
+            <div class="icon" ng-if="options.avatar.image" style="background-image: url('{{options.avatar.image}}')"></div>
+            <div class="icon ng-hide" ng-show="!options.avatar.image">
+                <md-icon>{{options.avatar.icon}}</md-icon>
+            </div>
         </div>
-    </div>
-    <div flex>
-        <div ng-if="options.superheadline.template" fs-banner-bind-compile="options.superheadline.template" fs-banner-bind-compile-scope="options.superheadline.scope" class="superheadline"></div>
-        <div class="headline" ng-if="options.headline.template" fs-banner-bind-compile="options.headline.template" fs-banner-bind-compile-scope="options.headline.scope"></div>
-        <div class="headline" ng-if="!options.headline.template">{{options.headline}}</div>
-        <div ng-if="options.subheadline.template" fs-banner-bind-compile="options.subheadline.template" fs-banner-bind-compile-scope="options.subheadline.scope" class="subheadline"></div>
-        <div class="subheadline" ng-if="!options.subheadline.template">{{options.subheadline}}</div>
+        <div flex>
+            <div ng-if="options.superheadline.template" fs-banner-bind-compile="options.superheadline.template" fs-banner-bind-compile-scope="options.superheadline.scope" class="superheadline"></div>
+            <div class="headline" ng-if="options.headline.template" fs-banner-bind-compile="options.headline.template" fs-banner-bind-compile-scope="options.headline.scope"></div>
+            <div class="headline" ng-if="!options.headline.template">{{options.headline}}</div>
+            <div ng-if="options.subheadline.template" fs-banner-bind-compile="options.subheadline.template" fs-banner-bind-compile-scope="options.subheadline.scope" class="subheadline"></div>
+            <div class="subheadline" ng-if="!options.subheadline.template">{{options.subheadline}}</div>
+        </div>
     </div>
     <div class="actions" layout="row" layout-align="end center">
         <span class="action" ng-repeat="action in options.actions">
@@ -25,4 +26,5 @@
             </span>
         </span>
     </div>
+    <div class="fs-theme-primary-background-color background"></div>
 </div>

@@ -7,7 +7,12 @@ fs-banner .fs-banner {
     position: relative;
     min-height: 90px;
     padding-left: 15px;
-    background-color: #ccc;
+}
+
+fs-banner .wrap {
+    position: relative;
+    z-index: 1;
+    min-height: 90px;
 }
 
 fs-banner .avatar {
@@ -134,4 +139,14 @@ fs-banner .actions.fixed {
 fs-banner-content {
     padding: 16px;
     display: block;
+}
+
+fs-banner .background {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	opacity: .8;
+	background-color: #ccc;
 }
